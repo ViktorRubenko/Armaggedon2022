@@ -15,6 +15,8 @@
 		E3FAED7D28079105008CDAF4 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FAED7B28079105008CDAF4 /* Service.swift */; };
 		E3FAED7E28079105008CDAF4 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FAED7C28079105008CDAF4 /* NetworkError.swift */; };
 		E3FAED8028079112008CDAF4 /* ResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FAED7F28079112008CDAF4 /* ResponseModel.swift */; };
+		E3FAED83280791E4008CDAF4 /* AsteroidModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FAED82280791E4008CDAF4 /* AsteroidModel.swift */; };
+		E3FAED8628079209008CDAF4 /* Mapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FAED8528079209008CDAF4 /* Mapper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		E3FAED7B28079105008CDAF4 /* Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		E3FAED7C28079105008CDAF4 /* NetworkError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		E3FAED7F28079112008CDAF4 /* ResponseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseModel.swift; sourceTree = "<group>"; };
+		E3FAED82280791E4008CDAF4 /* AsteroidModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsteroidModel.swift; sourceTree = "<group>"; };
+		E3FAED8528079209008CDAF4 /* Mapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mapper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,7 +54,6 @@
 				95294C6061F74EA055DF7EB9 /* Pods-Armaggedon 2022.debug.xcconfig */,
 				918CD4A16A80E84606B9DC59 /* Pods-Armaggedon 2022.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -84,6 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				E3FAED77280790CC008CDAF4 /* Application */,
+				E3FAED8428079209008CDAF4 /* Helper */,
 				E3FAED7A28079105008CDAF4 /* Service */,
 				E3FAED8128079114008CDAF4 /* Models */,
 				E3FAED78280790D6008CDAF4 /* Resources */,
@@ -130,9 +134,18 @@
 		E3FAED8128079114008CDAF4 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				E3FAED82280791E4008CDAF4 /* AsteroidModel.swift */,
 				E3FAED7F28079112008CDAF4 /* ResponseModel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		E3FAED8428079209008CDAF4 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				E3FAED8528079209008CDAF4 /* Mapper.swift */,
+			);
+			path = Helper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -251,6 +264,8 @@
 			files = (
 				E3FAED6428079057008CDAF4 /* AppDelegate.swift in Sources */,
 				E3FAED7E28079105008CDAF4 /* NetworkError.swift in Sources */,
+				E3FAED8628079209008CDAF4 /* Mapper.swift in Sources */,
+				E3FAED83280791E4008CDAF4 /* AsteroidModel.swift in Sources */,
 				E3FAED6628079057008CDAF4 /* SceneDelegate.swift in Sources */,
 				E3FAED8028079112008CDAF4 /* ResponseModel.swift in Sources */,
 				E3FAED7D28079105008CDAF4 /* Service.swift in Sources */,
