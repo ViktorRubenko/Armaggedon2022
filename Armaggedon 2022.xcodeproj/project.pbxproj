@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		E3FAED6428079057008CDAF4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FAED6328079057008CDAF4 /* AppDelegate.swift */; };
 		E3FAED6628079057008CDAF4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FAED6528079057008CDAF4 /* SceneDelegate.swift */; };
-		E3FAED6828079057008CDAF4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FAED6728079057008CDAF4 /* ViewController.swift */; };
-		E3FAED6B28079057008CDAF4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3FAED6928079057008CDAF4 /* Main.storyboard */; };
 		E3FAED6D28079059008CDAF4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3FAED6C28079059008CDAF4 /* Assets.xcassets */; };
 		E3FAED7028079059008CDAF4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3FAED6E28079059008CDAF4 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -19,8 +17,6 @@
 		E3FAED6028079057008CDAF4 /* Armaggedon 2022.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Armaggedon 2022.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3FAED6328079057008CDAF4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E3FAED6528079057008CDAF4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		E3FAED6728079057008CDAF4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		E3FAED6A28079057008CDAF4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E3FAED6C28079059008CDAF4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E3FAED6F28079059008CDAF4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E3FAED7128079059008CDAF4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -56,15 +52,37 @@
 		E3FAED6228079057008CDAF4 /* Armaggedon 2022 */ = {
 			isa = PBXGroup;
 			children = (
-				E3FAED6328079057008CDAF4 /* AppDelegate.swift */,
-				E3FAED6528079057008CDAF4 /* SceneDelegate.swift */,
-				E3FAED6728079057008CDAF4 /* ViewController.swift */,
-				E3FAED6928079057008CDAF4 /* Main.storyboard */,
-				E3FAED6C28079059008CDAF4 /* Assets.xcassets */,
-				E3FAED6E28079059008CDAF4 /* LaunchScreen.storyboard */,
-				E3FAED7128079059008CDAF4 /* Info.plist */,
+				E3FAED77280790CC008CDAF4 /* Application */,
+				E3FAED78280790D6008CDAF4 /* Resources */,
+				E3FAED79280790DD008CDAF4 /* Views */,
 			);
 			path = "Armaggedon 2022";
+			sourceTree = "<group>";
+		};
+		E3FAED77280790CC008CDAF4 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				E3FAED6328079057008CDAF4 /* AppDelegate.swift */,
+				E3FAED6528079057008CDAF4 /* SceneDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		E3FAED78280790D6008CDAF4 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				E3FAED6C28079059008CDAF4 /* Assets.xcassets */,
+				E3FAED7128079059008CDAF4 /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		E3FAED79280790DD008CDAF4 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E3FAED6E28079059008CDAF4 /* LaunchScreen.storyboard */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -127,7 +145,6 @@
 			files = (
 				E3FAED7028079059008CDAF4 /* LaunchScreen.storyboard in Resources */,
 				E3FAED6D28079059008CDAF4 /* Assets.xcassets in Resources */,
-				E3FAED6B28079057008CDAF4 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,7 +155,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E3FAED6828079057008CDAF4 /* ViewController.swift in Sources */,
 				E3FAED6428079057008CDAF4 /* AppDelegate.swift in Sources */,
 				E3FAED6628079057008CDAF4 /* SceneDelegate.swift in Sources */,
 			);
@@ -147,14 +163,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		E3FAED6928079057008CDAF4 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E3FAED6A28079057008CDAF4 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		E3FAED6E28079059008CDAF4 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -291,10 +299,10 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = GW7LHNH94F;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Armaggedon 2022/Info.plist";
+				INFOPLIST_FILE = "Armaggedon 2022/Resources/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -306,7 +314,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -319,10 +327,10 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = GW7LHNH94F;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Armaggedon 2022/Info.plist";
+				INFOPLIST_FILE = "Armaggedon 2022/Resources/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -334,7 +342,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
