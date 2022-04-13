@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  Armaggedon 2022
 //
-//  Created by Victor Rubenko on 14.04.2022.
+//  Created by Victor Rubenko on 13.04.2022.
 //
 
 import UIKit
