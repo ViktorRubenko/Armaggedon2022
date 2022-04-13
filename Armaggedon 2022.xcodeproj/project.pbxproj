@@ -7,19 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8AB76A1B411C0BAD72F4FC20 /* Pods_Armaggedon_2022.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03442AC77DA88ED6D712B522 /* Pods_Armaggedon_2022.framework */; };
 		E3FAED6428079057008CDAF4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FAED6328079057008CDAF4 /* AppDelegate.swift */; };
 		E3FAED6628079057008CDAF4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FAED6528079057008CDAF4 /* SceneDelegate.swift */; };
 		E3FAED6D28079059008CDAF4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3FAED6C28079059008CDAF4 /* Assets.xcassets */; };
 		E3FAED7028079059008CDAF4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3FAED6E28079059008CDAF4 /* LaunchScreen.storyboard */; };
+		E3FAED7D28079105008CDAF4 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FAED7B28079105008CDAF4 /* Service.swift */; };
+		E3FAED7E28079105008CDAF4 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FAED7C28079105008CDAF4 /* NetworkError.swift */; };
+		E3FAED8028079112008CDAF4 /* ResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FAED7F28079112008CDAF4 /* ResponseModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		03442AC77DA88ED6D712B522 /* Pods_Armaggedon_2022.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Armaggedon_2022.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		918CD4A16A80E84606B9DC59 /* Pods-Armaggedon 2022.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Armaggedon 2022.release.xcconfig"; path = "Target Support Files/Pods-Armaggedon 2022/Pods-Armaggedon 2022.release.xcconfig"; sourceTree = "<group>"; };
+		95294C6061F74EA055DF7EB9 /* Pods-Armaggedon 2022.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Armaggedon 2022.debug.xcconfig"; path = "Target Support Files/Pods-Armaggedon 2022/Pods-Armaggedon 2022.debug.xcconfig"; sourceTree = "<group>"; };
 		E3FAED6028079057008CDAF4 /* Armaggedon 2022.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Armaggedon 2022.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3FAED6328079057008CDAF4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E3FAED6528079057008CDAF4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		E3FAED6C28079059008CDAF4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E3FAED6F28079059008CDAF4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E3FAED7128079059008CDAF4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E3FAED7B28079105008CDAF4 /* Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		E3FAED7C28079105008CDAF4 /* NetworkError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		E3FAED7F28079112008CDAF4 /* ResponseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -27,17 +37,38 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8AB76A1B411C0BAD72F4FC20 /* Pods_Armaggedon_2022.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3FBC9BC3C522D0C7A52161EF /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				95294C6061F74EA055DF7EB9 /* Pods-Armaggedon 2022.debug.xcconfig */,
+				918CD4A16A80E84606B9DC59 /* Pods-Armaggedon 2022.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		B6FBD3A287130C3DC1C08EB7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				03442AC77DA88ED6D712B522 /* Pods_Armaggedon_2022.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		E3FAED5728079057008CDAF4 = {
 			isa = PBXGroup;
 			children = (
 				E3FAED6228079057008CDAF4 /* Armaggedon 2022 */,
 				E3FAED6128079057008CDAF4 /* Products */,
+				3FBC9BC3C522D0C7A52161EF /* Pods */,
+				B6FBD3A287130C3DC1C08EB7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -53,6 +84,8 @@
 			isa = PBXGroup;
 			children = (
 				E3FAED77280790CC008CDAF4 /* Application */,
+				E3FAED7A28079105008CDAF4 /* Service */,
+				E3FAED8128079114008CDAF4 /* Models */,
 				E3FAED78280790D6008CDAF4 /* Resources */,
 				E3FAED79280790DD008CDAF4 /* Views */,
 			);
@@ -85,6 +118,23 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		E3FAED7A28079105008CDAF4 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				E3FAED7B28079105008CDAF4 /* Service.swift */,
+				E3FAED7C28079105008CDAF4 /* NetworkError.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		E3FAED8128079114008CDAF4 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E3FAED7F28079112008CDAF4 /* ResponseModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -92,9 +142,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E3FAED7428079059008CDAF4 /* Build configuration list for PBXNativeTarget "Armaggedon 2022" */;
 			buildPhases = (
+				5FC8622E938AEF03958CEDBC /* [CP] Check Pods Manifest.lock */,
 				E3FAED5C28079057008CDAF4 /* Sources */,
 				E3FAED5D28079057008CDAF4 /* Frameworks */,
 				E3FAED5E28079057008CDAF4 /* Resources */,
+				6E85C1AF5D525209AB395487 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -150,13 +202,58 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		5FC8622E938AEF03958CEDBC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Armaggedon 2022-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6E85C1AF5D525209AB395487 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Armaggedon 2022/Pods-Armaggedon 2022-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Armaggedon 2022/Pods-Armaggedon 2022-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Armaggedon 2022/Pods-Armaggedon 2022-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		E3FAED5C28079057008CDAF4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				E3FAED6428079057008CDAF4 /* AppDelegate.swift in Sources */,
+				E3FAED7E28079105008CDAF4 /* NetworkError.swift in Sources */,
 				E3FAED6628079057008CDAF4 /* SceneDelegate.swift in Sources */,
+				E3FAED8028079112008CDAF4 /* ResponseModel.swift in Sources */,
+				E3FAED7D28079105008CDAF4 /* Service.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,6 +389,7 @@
 		};
 		E3FAED7528079059008CDAF4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 95294C6061F74EA055DF7EB9 /* Pods-Armaggedon 2022.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -320,6 +418,7 @@
 		};
 		E3FAED7628079059008CDAF4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 918CD4A16A80E84606B9DC59 /* Pods-Armaggedon 2022.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
