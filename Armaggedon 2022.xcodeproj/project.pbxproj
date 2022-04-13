@@ -17,6 +17,9 @@
 		E3FAED8028079112008CDAF4 /* ResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FAED7F28079112008CDAF4 /* ResponseModel.swift */; };
 		E3FAED83280791E4008CDAF4 /* AsteroidModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FAED82280791E4008CDAF4 /* AsteroidModel.swift */; };
 		E3FAED8628079209008CDAF4 /* Mapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FAED8528079209008CDAF4 /* Mapper.swift */; };
+		E3FAED8B2807922B008CDAF4 /* AsteroidListViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FAED882807922B008CDAF4 /* AsteroidListViewModelProtocol.swift */; };
+		E3FAED8C2807922B008CDAF4 /* ViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FAED892807922B008CDAF4 /* ViewModelProtocol.swift */; };
+		E3FAED8D2807922B008CDAF4 /* AsteroidsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FAED8A2807922B008CDAF4 /* AsteroidsListViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +37,9 @@
 		E3FAED7F28079112008CDAF4 /* ResponseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseModel.swift; sourceTree = "<group>"; };
 		E3FAED82280791E4008CDAF4 /* AsteroidModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsteroidModel.swift; sourceTree = "<group>"; };
 		E3FAED8528079209008CDAF4 /* Mapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mapper.swift; sourceTree = "<group>"; };
+		E3FAED882807922B008CDAF4 /* AsteroidListViewModelProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsteroidListViewModelProtocol.swift; sourceTree = "<group>"; };
+		E3FAED892807922B008CDAF4 /* ViewModelProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModelProtocol.swift; sourceTree = "<group>"; };
+		E3FAED8A2807922B008CDAF4 /* AsteroidsListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsteroidsListViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,10 +93,11 @@
 			isa = PBXGroup;
 			children = (
 				E3FAED77280790CC008CDAF4 /* Application */,
+				E3FAED78280790D6008CDAF4 /* Resources */,
 				E3FAED8428079209008CDAF4 /* Helper */,
 				E3FAED7A28079105008CDAF4 /* Service */,
 				E3FAED8128079114008CDAF4 /* Models */,
-				E3FAED78280790D6008CDAF4 /* Resources */,
+				E3FAED872807922B008CDAF4 /* ViewModels */,
 				E3FAED79280790DD008CDAF4 /* Views */,
 			);
 			path = "Armaggedon 2022";
@@ -146,6 +153,16 @@
 				E3FAED8528079209008CDAF4 /* Mapper.swift */,
 			);
 			path = Helper;
+			sourceTree = "<group>";
+		};
+		E3FAED872807922B008CDAF4 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				E3FAED882807922B008CDAF4 /* AsteroidListViewModelProtocol.swift */,
+				E3FAED892807922B008CDAF4 /* ViewModelProtocol.swift */,
+				E3FAED8A2807922B008CDAF4 /* AsteroidsListViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -265,10 +282,13 @@
 				E3FAED6428079057008CDAF4 /* AppDelegate.swift in Sources */,
 				E3FAED7E28079105008CDAF4 /* NetworkError.swift in Sources */,
 				E3FAED8628079209008CDAF4 /* Mapper.swift in Sources */,
+				E3FAED8B2807922B008CDAF4 /* AsteroidListViewModelProtocol.swift in Sources */,
 				E3FAED83280791E4008CDAF4 /* AsteroidModel.swift in Sources */,
 				E3FAED6628079057008CDAF4 /* SceneDelegate.swift in Sources */,
 				E3FAED8028079112008CDAF4 /* ResponseModel.swift in Sources */,
+				E3FAED8D2807922B008CDAF4 /* AsteroidsListViewModel.swift in Sources */,
 				E3FAED7D28079105008CDAF4 /* Service.swift in Sources */,
+				E3FAED8C2807922B008CDAF4 /* ViewModelProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
