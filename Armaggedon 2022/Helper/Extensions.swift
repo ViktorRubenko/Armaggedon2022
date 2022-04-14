@@ -33,3 +33,24 @@ extension String {
         return results
     }
 }
+
+extension UserDefaults {
+    @objc var units: String {
+        get {
+            string(forKey: "units") ?? Constants.Units.kilometers.rawValue
+        }
+        
+        set {
+            set(newValue, forKey: "units")
+        }
+    }
+    
+    @objc var onlyHazardous: Bool {
+        get {
+            bool(forKey: "onlyHazardous")
+        }
+        set {
+            set(newValue, forKey: "onlyHazardous")
+        }
+    }
+}
