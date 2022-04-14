@@ -26,6 +26,7 @@
 		E3FAED9C28086F50008CDAF4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FAED9B28086F50008CDAF4 /* Constants.swift */; };
 		E3FAED9E28087469008CDAF4 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FAED9D28087469008CDAF4 /* Extensions.swift */; };
 		E3FAEDA0280897C7008CDAF4 /* AsteroidCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FAED9F280897C7008CDAF4 /* AsteroidCellModel.swift */; };
+		E3FAEDA22808B6BA008CDAF4 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FAEDA12808B6BA008CDAF4 /* TabBarController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 		E3FAED9B28086F50008CDAF4 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		E3FAED9D28087469008CDAF4 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		E3FAED9F280897C7008CDAF4 /* AsteroidCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsteroidCellModel.swift; sourceTree = "<group>"; };
+		E3FAEDA12808B6BA008CDAF4 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -187,6 +189,7 @@
 			isa = PBXGroup;
 			children = (
 				E3FAED932807925D008CDAF4 /* AsteroidsViewController.swift */,
+				E3FAEDA12808B6BA008CDAF4 /* TabBarController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -311,6 +314,7 @@
 				E3FAED8B2807922B008CDAF4 /* AsteroidListViewModelProtocol.swift in Sources */,
 				E3FAED9A28084C3C008CDAF4 /* HeaderApproachView.swift in Sources */,
 				E3FAED9028079253008CDAF4 /* AppDelegate.swift in Sources */,
+				E3FAEDA22808B6BA008CDAF4 /* TabBarController.swift in Sources */,
 				E3FAED83280791E4008CDAF4 /* AsteroidModel.swift in Sources */,
 				E3FAED9128079253008CDAF4 /* SceneDelegate.swift in Sources */,
 				E3FAED8028079112008CDAF4 /* ResponseModel.swift in Sources */,
