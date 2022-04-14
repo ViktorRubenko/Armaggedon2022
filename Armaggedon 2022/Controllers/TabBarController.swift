@@ -22,7 +22,7 @@ final class TabBarController: UITabBarController {
         navBarAppearance.backgroundColor = UIColor(red: 0.973, green: 0.973, blue: 0.973, alpha: 1)
         
         let nav1 = UINavigationController(
-            rootViewController: AsteroidsViewController(
+            rootViewController: AsteroidsListViewController(
                 viewModel: AsteroidsListViewModel()))
         let nav2 = UINavigationController()
         

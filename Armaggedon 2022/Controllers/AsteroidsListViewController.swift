@@ -1,5 +1,5 @@
 //
-//  AsteroidsViewController.swift
+//  AsteroidsListViewController.swift
 //  Armaggedon 2022
 //
 //  Created by Victor Rubenko on 13.04.2022.
@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-final class AsteroidsViewController: UIViewController {
+final class AsteroidsListViewController: UIViewController {
     private var viewModel: AsteroidListViewModelProtocol!
     private var cancellables = Set<AnyCancellable>()
     private lazy var collectionView: UICollectionView = {
@@ -43,7 +43,7 @@ final class AsteroidsViewController: UIViewController {
     }
 }
 // MARK: - Methods
-extension AsteroidsViewController {
+extension AsteroidsListViewController {
     private func setupViews() {
         let safeArea = view.safeAreaLayoutGuide
         view.backgroundColor = .white
@@ -101,13 +101,13 @@ extension AsteroidsViewController {
     }
 }
 // MARK: - Actions
-extension AsteroidsViewController {
+extension AsteroidsListViewController {
     @objc func didTapFilterButton() {
         print("open filter")
     }
 }
 // MARK: - TableView Delegate/DS
-extension AsteroidsViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension AsteroidsListViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AsteroidCell.identifier, for: indexPath) as! AsteroidCell
         cell.configure(viewModel.asteroids.value[indexPath.row])
