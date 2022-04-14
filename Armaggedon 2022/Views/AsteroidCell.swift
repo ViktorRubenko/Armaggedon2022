@@ -27,6 +27,14 @@ class AsteroidCell: UICollectionViewCell {
     private let dateLabel = UILabel.defaultLabel()
     private let distanceLabel = UILabel.defaultLabel()
     private let hazardousLabel = UILabel.defaultLabel()
+    private let destroyButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.backgroundColor = Constants.Colors.destroyButtonColor
+        button.layer.cornerRadius = 14
+        button.setTitleColor(Constants.Colors.secondaryLabelColor, for: .normal)
+        button.setTitle("УНИЧТОЖИТЬ", for: .normal)
+        return button
+    }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -49,10 +57,11 @@ extension AsteroidCell {
         
         contentView.addSubview(headerView)
         contentView.addSubview(infoLabelStack)
+        contentView.addSubview(hazardousLabel)
+        contentView.addSubview(destroyButton)
         infoLabelStack.addArrangedSubview(diameterLabel)
         infoLabelStack.addArrangedSubview(dateLabel)
         infoLabelStack.addArrangedSubview(distanceLabel)
-        contentView.addSubview(hazardousLabel)
         
         headerView.snp.makeConstraints { make in
             make.height.equalTo(145)
@@ -71,6 +80,13 @@ extension AsteroidCell {
             make.leading.equalTo(infoLabelStack)
             make.height.equalTo(24)
             make.bottom.equalToSuperview().offset(-19)
+        }
+        
+        destroyButton.snp.makeConstraints { make in
+            make.height.equalTo(28)
+            make.width.equalTo(121)
+            make.trailing.equalTo(-16)
+            make.bottom.equalTo(-16)
         }
     }
     
