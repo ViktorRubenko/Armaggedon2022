@@ -9,6 +9,6 @@ import Foundation
 import Combine
 
 protocol AsteroidListViewModelProtocol: ViewModelProtocol {
-    var asteroidsPublisher: Published<[AsteroidModel]>.Publisher { get }
+    var asteroids: CurrentValueSubject<[AsteroidCellModel], Never> { get }
     var errorPublisher: Published<String>.Publisher { get }
 }

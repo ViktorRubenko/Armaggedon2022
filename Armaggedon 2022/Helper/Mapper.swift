@@ -14,7 +14,7 @@ final class Mapper {
                 AsteroidModel(
                     name: $0.name,
                     id: $0.id,
-                    approachDate: Date(timeIntervalSince1970: TimeInterval($0.closeApproachData.first!.epochDateCloseApproach)),
+                    approachDate: Date(timeIntervalSince1970: TimeInterval($0.closeApproachData.first!.epochDateCloseApproach / 1000)),
                     estimatedDiameter: Int(round($0.estimatedDiameter.meters.estimatedDiameterMin + $0.estimatedDiameter.meters.estimatedDiameterMin)) / 2,
                     potentiallyHazardouds: $0.isPotentiallyHazardousAsteroid,
                     missDistance: AsteroidDistance(
@@ -23,5 +23,31 @@ final class Mapper {
             }
         })
         
+    }
+    
+    public func asteroidModelToCellModel(_ asteroidModel: AsteroidModel, units: String = "KM") -> AsteroidCellModel {
+        let matches = asteroidModel.name.match("\\((.*?)\\)")
+        let distance = "\(formatNumber(asteroidModel.missDistance.kilometers)) км"
+        return AsteroidCellModel(
+            name: matches.first != nil ? matches.first! : asteroidModel.name,
+            distanceString: distance,
+            dateString: formatDate(asteroidModel.approachDate),
+            diameter: asteroidModel.estimatedDiameter,
+            hazardous: asteroidModel.potentiallyHazardouds)
+    }
+    
+    public func formatDate(_ date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "ru_RU")
+        formatter.setLocalizedDateFormatFromTemplate("d MMMM yyyy")
+        return formatter.string(from: date)
+    }
+    
+    public func formatNumber(_ number: Int) -> String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.locale = Locale(identifier: "ru_RU")
+        
+        return formatter.string(for: number)!
     }
 }

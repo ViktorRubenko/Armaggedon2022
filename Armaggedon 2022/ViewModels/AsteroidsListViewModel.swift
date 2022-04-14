@@ -8,10 +8,10 @@
 import Foundation
 import Combine
 
-final class AsteroidsListViewModel: ObservableObject, AsteroidListViewModelProtocol {
-    @Published private var asteroids = [AsteroidModel]()
-    var asteroidsPublisher: Published<[AsteroidModel]>.Publisher { $asteroids }
-    @Published private var error: String = ""
+final class AsteroidsListViewModel: AsteroidListViewModelProtocol {
+    private var responseAsteroids = [AsteroidModel]()
+    private(set) var asteroids = CurrentValueSubject<[AsteroidCellModel], Never>([])
+    @Published private(set) var error: String = ""
     var errorPublisher: Published<String>.Publisher { $error }
     
     private var cancellables = Set<AnyCancellable>()
@@ -28,7 +28,11 @@ final class AsteroidsListViewModel: ObservableObject, AsteroidListViewModelProto
                 if dataResponse.error != nil {
                     self?.createAlert(with: dataResponse.error!)
                 } else {
-                    self?.asteroids = Mapper().asteroidsFromResponse(dataResponse.value!)
+                    let asteroids = Mapper().asteroidsFromResponse(dataResponse.value!).sorted(by: { $0.approachDate < $1.approachDate })
+                    self?.responseAsteroids = asteroids
+                    self?.asteroids.send(asteroids.compactMap {
+                        Mapper().asteroidModelToCellModel($0)
+                    })
                 }
             }.store(in: &cancellables)
     }
