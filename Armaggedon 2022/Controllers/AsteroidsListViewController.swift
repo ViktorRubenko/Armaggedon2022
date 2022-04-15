@@ -103,7 +103,8 @@ extension AsteroidsListViewController {
 // MARK: - Actions
 extension AsteroidsListViewController {
     @objc func didTapFilterButton() {
-        print("open filter")
+        let vc = FilterViewController(viewModel: FilterViewModel())
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 // MARK: - TableView Delegate/DS

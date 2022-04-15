@@ -24,8 +24,12 @@ enum Constants {
         static let destroyButtonColor: UIColor = UIColor(red: 0, green: 122/255, blue: 255/255, alpha: 1)
         static let secondaryLabelColor: UIColor = .white
     }
-    enum Units: String {
+    enum Units: String, CaseIterable {
         case kilometers = "км"
         case lunar = "л.орб."
+    }
+    enum FilterCells {
+        case units
+        case onlyHazardous
     }
 }

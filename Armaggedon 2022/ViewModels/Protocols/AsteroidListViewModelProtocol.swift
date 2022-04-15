@@ -10,6 +10,5 @@ import Combine
 
 protocol AsteroidListViewModelProtocol: ViewModelProtocol {
     var asteroids: CurrentValueSubject<[AsteroidCellModel], Never> { get }
-    var units: CurrentValueSubject<Constants.Units, Never> { get }
     var errorPublisher: Published<String>.Publisher { get }
 }

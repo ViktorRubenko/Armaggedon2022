@@ -25,9 +25,15 @@ final class Mapper {
         
     }
     
-    public func asteroidModelToCellModel(_ asteroidModel: AsteroidModel, units: String = "KM") -> AsteroidCellModel {
+    public func asteroidModelToCellModel(_ asteroidModel: AsteroidModel, units: Constants.Units) -> AsteroidCellModel {
         let matches = asteroidModel.name.match("\\((.*?)\\)")
-        let distance = "\(formatNumber(asteroidModel.missDistance.kilometers)) км"
+        let distance: String
+        switch units{
+        case .kilometers:
+            distance = "\(formatNumber(asteroidModel.missDistance.kilometers)) \(units.rawValue)"
+        case .lunar:
+            distance = "\(formatNumber(asteroidModel.missDistance.lunar)) \(units.rawValue)"
+        }
         return AsteroidCellModel(
             name: matches.first != nil ? matches.first! : asteroidModel.name,
             distanceString: distance,

@@ -6,26 +6,32 @@
 //
 
 import Foundation
-import Combine
 
 final class FilterViewModel: FilterViewModelProtocol {
-    private var cancellables = Set<AnyCancellable>()
-    var units: CurrentValueSubject<Constants.Units, Never>
-    var onlyHazardous: CurrentValueSubject<Bool, Never>
+    
+    private(set) var units: Constants.Units
+    private(set) var onlyHazardous: Bool
+    private(set) var cells = [
+        Constants.FilterCells.units,
+        Constants.FilterCells.onlyHazardous
+    ]
     
     init() {
-        units = CurrentValueSubject<Constants.Units, Never>(Constants.Units(rawValue: UserDefaults.standard.units)!)
-        onlyHazardous = CurrentValueSubject<Bool, Never>(UserDefaults.standard.onlyHazardous)
+        units = Constants.Units(rawValue: UserDefaults.standard.units)!
+        onlyHazardous = UserDefaults.standard.onlyHazardous
     }
     
-    func apply(units: Constants.Units, onlyHazardous: Bool) {
-        UserDefaults.standard.units = units.rawValue
+    func apply() {
         UserDefaults.standard.onlyHazardous = onlyHazardous
+        UserDefaults.standard.units = units.rawValue
     }
     
-    func fetch() {
-        units.value = Constants.Units(rawValue: UserDefaults.standard.units)!
-        onlyHazardous.value = UserDefaults.standard.onlyHazardous
+    func setHazardous(onlyHazardous: Bool) {
+        self.onlyHazardous = onlyHazardous
+    }
+    
+    func setUnits(units: Constants.Units) {
+        self.units = units
     }
     
 }

@@ -30,6 +30,8 @@
 		E3FAEDA42808BDA4008CDAF4 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FAEDA32808BDA4008CDAF4 /* FilterViewController.swift */; };
 		E3FAEDA62808BDB2008CDAF4 /* FilterViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FAEDA52808BDB2008CDAF4 /* FilterViewModelProtocol.swift */; };
 		E3FAEDB02808C241008CDAF4 /* FilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FAEDAF2808C241008CDAF4 /* FilterViewModel.swift */; };
+		E3FAEDB7280961D3008CDAF4 /* UnitsFilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FAEDB6280961D3008CDAF4 /* UnitsFilterTableViewCell.swift */; };
+		E3FAEDB928097066008CDAF4 /* HazardousFilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FAEDB828097066008CDAF4 /* HazardousFilterTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +62,8 @@
 		E3FAEDA32808BDA4008CDAF4 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		E3FAEDA52808BDB2008CDAF4 /* FilterViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewModelProtocol.swift; sourceTree = "<group>"; };
 		E3FAEDAF2808C241008CDAF4 /* FilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewModel.swift; sourceTree = "<group>"; };
+		E3FAEDB6280961D3008CDAF4 /* UnitsFilterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitsFilterTableViewCell.swift; sourceTree = "<group>"; };
+		E3FAEDB828097066008CDAF4 /* HazardousFilterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HazardousFilterTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +152,8 @@
 				E3FAED6E28079059008CDAF4 /* LaunchScreen.storyboard */,
 				E3FAED9528084794008CDAF4 /* AsteroidCell.swift */,
 				E3FAED9928084C3C008CDAF4 /* HeaderApproachView.swift */,
+				E3FAEDB6280961D3008CDAF4 /* UnitsFilterTableViewCell.swift */,
+				E3FAEDB828097066008CDAF4 /* HazardousFilterTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -339,8 +345,10 @@
 				E3FAED8D2807922B008CDAF4 /* AsteroidsListViewModel.swift in Sources */,
 				E3FAEDA62808BDB2008CDAF4 /* FilterViewModelProtocol.swift in Sources */,
 				E3FAED9E28087469008CDAF4 /* Extensions.swift in Sources */,
+				E3FAEDB7280961D3008CDAF4 /* UnitsFilterTableViewCell.swift in Sources */,
 				E3FAEDA42808BDA4008CDAF4 /* FilterViewController.swift in Sources */,
 				E3FAED7D28079105008CDAF4 /* Service.swift in Sources */,
+				E3FAEDB928097066008CDAF4 /* HazardousFilterTableViewCell.swift in Sources */,
 				E3FAED9C28086F50008CDAF4 /* Constants.swift in Sources */,
 				E3FAED942807925D008CDAF4 /* AsteroidsListViewController.swift in Sources */,
 				E3FAEDA0280897C7008CDAF4 /* AsteroidCellModel.swift in Sources */,
