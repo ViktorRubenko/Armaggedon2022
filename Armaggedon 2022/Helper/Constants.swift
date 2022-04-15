@@ -18,6 +18,14 @@ enum Constants {
             UIColor(red: 255/255, green: 177/255, blue: 153/255, alpha: 1).cgColor,
             UIColor(red: 255/255, green: 8/255, blue: 68/255, alpha: 1).cgColor
         ]
+        static let lightGreen: [CGColor] = [
+            UIColor(red: 204/255, green: 255/255, blue: 204/255, alpha: 1).cgColor,
+            UIColor(red: 105/255, green: 202/255, blue: 120/255, alpha: 1).cgColor
+        ]
+        static let lightRed: [CGColor] = [
+            UIColor(red: 255/255, green: 205/255, blue: 204/255, alpha: 1).cgColor,
+            UIColor(red: 255/255, green: 8/255, blue: 68/255, alpha: 1).cgColor
+        ]
     }
     enum Colors {
         static let primaryLabelColor: UIColor = .black
