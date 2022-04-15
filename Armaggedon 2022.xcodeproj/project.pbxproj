@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		8AB76A1B411C0BAD72F4FC20 /* Pods_Armaggedon_2022.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03442AC77DA88ED6D712B522 /* Pods_Armaggedon_2022.framework */; };
 		E31750A82809BAA100462A3F /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31750A72809BAA100462A3F /* DatabaseService.swift */; };
+		E31750AA2809D9C400462A3F /* DestroyAsteroidsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31750A92809D9C400462A3F /* DestroyAsteroidsListViewController.swift */; };
+		E31750AC2809DA0100462A3F /* DestroyAsteroidsListViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31750AB2809DA0100462A3F /* DestroyAsteroidsListViewModelProtocol.swift */; };
+		E31750AE2809DA1D00462A3F /* DestroyAsteroidsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31750AD2809DA1D00462A3F /* DestroyAsteroidsListViewModel.swift */; };
+		E3BEBD6B280A0FE100F912D0 /* DestroyAsteroidCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3BEBD6A280A0FE100F912D0 /* DestroyAsteroidCollectionViewCell.swift */; };
 		E3FAED6D28079059008CDAF4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3FAED6C28079059008CDAF4 /* Assets.xcassets */; };
 		E3FAED7028079059008CDAF4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3FAED6E28079059008CDAF4 /* LaunchScreen.storyboard */; };
 		E3FAED7D28079105008CDAF4 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FAED7B28079105008CDAF4 /* NetworkService.swift */; };
@@ -40,6 +44,10 @@
 		918CD4A16A80E84606B9DC59 /* Pods-Armaggedon 2022.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Armaggedon 2022.release.xcconfig"; path = "Target Support Files/Pods-Armaggedon 2022/Pods-Armaggedon 2022.release.xcconfig"; sourceTree = "<group>"; };
 		95294C6061F74EA055DF7EB9 /* Pods-Armaggedon 2022.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Armaggedon 2022.debug.xcconfig"; path = "Target Support Files/Pods-Armaggedon 2022/Pods-Armaggedon 2022.debug.xcconfig"; sourceTree = "<group>"; };
 		E31750A72809BAA100462A3F /* DatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseService.swift; sourceTree = "<group>"; };
+		E31750A92809D9C400462A3F /* DestroyAsteroidsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestroyAsteroidsListViewController.swift; sourceTree = "<group>"; };
+		E31750AB2809DA0100462A3F /* DestroyAsteroidsListViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestroyAsteroidsListViewModelProtocol.swift; sourceTree = "<group>"; };
+		E31750AD2809DA1D00462A3F /* DestroyAsteroidsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestroyAsteroidsListViewModel.swift; sourceTree = "<group>"; };
+		E3BEBD6A280A0FE100F912D0 /* DestroyAsteroidCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestroyAsteroidCollectionViewCell.swift; sourceTree = "<group>"; };
 		E3FAED6028079057008CDAF4 /* Armaggedon 2022.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Armaggedon 2022.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3FAED6C28079059008CDAF4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E3FAED6F28079059008CDAF4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -155,6 +163,7 @@
 				E3FAED9528084794008CDAF4 /* AsteroidCell.swift */,
 				E3FAED9928084C3C008CDAF4 /* HeaderApproachView.swift */,
 				E3FAEDB6280961D3008CDAF4 /* UnitsFilterTableViewCell.swift */,
+				E3BEBD6A280A0FE100F912D0 /* DestroyAsteroidCollectionViewCell.swift */,
 				E3FAEDB828097066008CDAF4 /* HazardousFilterTableViewCell.swift */,
 			);
 			path = Views;
@@ -196,6 +205,7 @@
 				E3FAEDAE2808C235008CDAF4 /* Protocols */,
 				E3FAED8A2807922B008CDAF4 /* AsteroidsListViewModel.swift */,
 				E3FAEDAF2808C241008CDAF4 /* FilterViewModel.swift */,
+				E31750AD2809DA1D00462A3F /* DestroyAsteroidsListViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -206,6 +216,7 @@
 				E3FAED932807925D008CDAF4 /* AsteroidsListViewController.swift */,
 				E3FAEDA32808BDA4008CDAF4 /* FilterViewController.swift */,
 				E3FAEDA12808B6BA008CDAF4 /* TabBarController.swift */,
+				E31750A92809D9C400462A3F /* DestroyAsteroidsListViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -216,6 +227,7 @@
 				E3FAED882807922B008CDAF4 /* AsteroidListViewModelProtocol.swift */,
 				E3FAED892807922B008CDAF4 /* ViewModelProtocol.swift */,
 				E3FAEDA52808BDB2008CDAF4 /* FilterViewModelProtocol.swift */,
+				E31750AB2809DA0100462A3F /* DestroyAsteroidsListViewModelProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -334,12 +346,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E31750AE2809DA1D00462A3F /* DestroyAsteroidsListViewModel.swift in Sources */,
 				E3FAED9628084794008CDAF4 /* AsteroidCell.swift in Sources */,
 				E3FAED7E28079105008CDAF4 /* NetworkError.swift in Sources */,
 				E3FAEDB02808C241008CDAF4 /* FilterViewModel.swift in Sources */,
+				E3BEBD6B280A0FE100F912D0 /* DestroyAsteroidCollectionViewCell.swift in Sources */,
 				E3FAED8628079209008CDAF4 /* Mapper.swift in Sources */,
 				E3FAED8B2807922B008CDAF4 /* AsteroidListViewModelProtocol.swift in Sources */,
 				E3FAED9A28084C3C008CDAF4 /* HeaderApproachView.swift in Sources */,
+				E31750AA2809D9C400462A3F /* DestroyAsteroidsListViewController.swift in Sources */,
 				E3FAED9028079253008CDAF4 /* AppDelegate.swift in Sources */,
 				E3FAEDA22808B6BA008CDAF4 /* TabBarController.swift in Sources */,
 				E3FAED83280791E4008CDAF4 /* AsteroidModel.swift in Sources */,
@@ -351,6 +366,7 @@
 				E3FAEDB7280961D3008CDAF4 /* UnitsFilterTableViewCell.swift in Sources */,
 				E3FAEDA42808BDA4008CDAF4 /* FilterViewController.swift in Sources */,
 				E3FAED7D28079105008CDAF4 /* NetworkService.swift in Sources */,
+				E31750AC2809DA0100462A3F /* DestroyAsteroidsListViewModelProtocol.swift in Sources */,
 				E3FAEDB928097066008CDAF4 /* HazardousFilterTableViewCell.swift in Sources */,
 				E31750A82809BAA100462A3F /* DatabaseService.swift in Sources */,
 				E3FAED9C28086F50008CDAF4 /* Constants.swift in Sources */,

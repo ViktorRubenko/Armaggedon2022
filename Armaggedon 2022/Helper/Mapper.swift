@@ -60,7 +60,7 @@ final class Mapper: MapperProtocol {
     private func formatDate(_ date: Date) -> String {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "ru_RU")
-        formatter.setLocalizedDateFormatFromTemplate("d MMMM yyyy")
+        formatter.dateFormat = "d MMMM yyyy"
         return formatter.string(from: date)
     }
     
