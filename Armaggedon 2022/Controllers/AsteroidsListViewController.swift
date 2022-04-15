@@ -118,4 +118,11 @@ extension AsteroidsListViewController: UICollectionViewDelegate, UICollectionVie
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         viewModel.asteroids.value.count
     }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        
+        if (viewModel.asteroids.value.count - indexPath.row) < 5 {
+            viewModel.fetch()
+        }
+    }
 }

@@ -16,6 +16,8 @@ final class AsteroidsListViewModel: AsteroidListViewModelProtocol {
     
     private var cancellables = Set<AnyCancellable>()
     private var dataManager: ServiceProtocol
+    private var mapper: MapperProtocol
+    private var updating = false
     private var onlyHazardous: Bool {
         didSet {
             if onlyHazardous != oldValue {
@@ -30,9 +32,11 @@ final class AsteroidsListViewModel: AsteroidListViewModelProtocol {
             }
         }
     }
+    private var date = Date()
     
-    init(dataManager: ServiceProtocol = Service.shared) {
+    init(dataManager: ServiceProtocol = Service.shared, mapper: MapperProtocol = Mapper()) {
         self.dataManager = dataManager
+        self.mapper = mapper
         self.onlyHazardous = UserDefaults.standard.onlyHazardous
         self.units = Constants.Units(rawValue: UserDefaults.standard.units)!
 
@@ -52,15 +56,19 @@ final class AsteroidsListViewModel: AsteroidListViewModelProtocol {
     }
     
     func fetch() {
-        dataManager.fetchAsteroids(startDate: "2022-01-01", endDate: nil)
+        guard !updating else { return }
+        updating = true
+        dataManager.fetchAsteroids(startDate: self.mapper.dateForRequest(self.date), endDate: nil)
             .sink { [weak self] dataResponse in
                 guard self != nil else { return }
                 if dataResponse.error != nil {
                     self!.createAlert(with: dataResponse.error!)
                 } else {
-                    self!.responseAsteroids = Mapper().asteroidsFromResponse(dataResponse.value!).sorted(by: { $0.approachDate < $1.approachDate })
+                    self!.date = Calendar.current.date(byAdding: .day, value: 7, to: self!.date)!
+                    self!.responseAsteroids += self!.mapper.asteroidsFromResponse(dataResponse.value!).sorted(by: { $0.approachDate < $1.approachDate })
                     self!.update()
                 }
+                self!.updating = false
             }.store(in: &cancellables)
     }
     
@@ -71,11 +79,11 @@ final class AsteroidsListViewModel: AsteroidListViewModelProtocol {
     private func update() {
         if onlyHazardous {
             asteroids.send(responseAsteroids.filter({ $0.potentiallyHazardouds }).compactMap {
-                Mapper().asteroidModelToCellModel($0, units: units)
+                self.mapper.asteroidModelToCellModel($0, units: units)
             })
         } else {
             asteroids.send(responseAsteroids.compactMap {
-                Mapper().asteroidModelToCellModel($0, units: units)
+                self.mapper.asteroidModelToCellModel($0, units: units)
             })
         }
     }

@@ -7,7 +7,13 @@
 
 import Foundation
 
-final class Mapper {
+protocol MapperProtocol {
+    func asteroidsFromResponse(_ response: ResponseModel) -> [AsteroidModel]
+    func asteroidModelToCellModel(_ asteroidModel: AsteroidModel, units: Constants.Units) -> AsteroidCellModel
+    func dateForRequest(_ date: Date) -> String
+}
+
+final class Mapper: MapperProtocol {
     public func asteroidsFromResponse(_ response: ResponseModel) -> [AsteroidModel] {
         return response.nearEarthObjects.values.reduce([AsteroidModel](), { partialResult, nearEarthObjects in
             partialResult + nearEarthObjects.compactMap {
@@ -30,9 +36,9 @@ final class Mapper {
         let distance: String
         switch units{
         case .kilometers:
-            distance = "\(formatNumber(asteroidModel.missDistance.kilometers)) \(units.rawValue)"
+            distance = "\(formatNumber(asteroidModel.missDistance.kilometers)) км"
         case .lunar:
-            distance = "\(formatNumber(asteroidModel.missDistance.lunar)) \(units.rawValue)"
+            distance = "\(formatNumber(asteroidModel.missDistance.lunar)) лунных орбит"
         }
         return AsteroidCellModel(
             name: matches.first != nil ? matches.first! : asteroidModel.name,
@@ -42,18 +48,24 @@ final class Mapper {
             hazardous: asteroidModel.potentiallyHazardouds)
     }
     
-    public func formatDate(_ date: Date) -> String {
+    private func formatDate(_ date: Date) -> String {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "ru_RU")
         formatter.setLocalizedDateFormatFromTemplate("d MMMM yyyy")
         return formatter.string(from: date)
     }
     
-    public func formatNumber(_ number: Int) -> String {
+    private func formatNumber(_ number: Int) -> String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
         formatter.locale = Locale(identifier: "ru_RU")
         
         return formatter.string(for: number)!
+    }
+    
+    public func dateForRequest(_ date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter.string(from: date)
     }
 }
