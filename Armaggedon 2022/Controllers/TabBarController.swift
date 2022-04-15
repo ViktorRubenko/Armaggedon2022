@@ -24,7 +24,10 @@ final class TabBarController: UITabBarController {
         let nav1 = UINavigationController(
             rootViewController: AsteroidsListViewController(
                 viewModel: AsteroidsListViewModel()))
-        let nav2 = UINavigationController()
+        let nav2 = UINavigationController(
+            rootViewController: DestroyAsteroidsListViewController(
+                viewModel: DestroyAsteroidsListViewModel())
+        )
         
         [nav1, nav2].forEach {
             $0.navigationBar.scrollEdgeAppearance = navBarAppearance
