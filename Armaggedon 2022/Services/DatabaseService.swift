@@ -14,6 +14,7 @@ protocol DatabaseServiceProtocol {
     func get<R: Object>(fromEntity entity: R.Type, sortedByKey sortKey: String?, isAscending: Bool) -> Results<R>
     func delete<T: Object>(_ object: T)
     func delete<S: Sequence>(_ objects: S) where S.Iterator.Element: Object
+    func exists<T: Object>(id: String, ofType: T.Type) -> Bool
 }
 
 final class RealmManager: DatabaseServiceProtocol {
@@ -42,14 +43,17 @@ final class RealmManager: DatabaseServiceProtocol {
         realm.add(objects)
         try! realm.commitWrite()
     }
-
-    func get<R>(fromEntity entity: R.Type, sortedByKey sortKey: String?, isAscending: Bool) -> Results<R> where R : Object {
-        var objects = realm.objects(entity)
-        if sortKey != nil {
-            objects = objects.sorted(byKeyPath: sortKey!, ascending: isAscending)
+    
+    func get<R>(
+        fromEntity entity: R.Type ,
+        sortedByKey sortKey: String?,
+        isAscending: Bool) -> Results<R> where R : Object {
+            var objects = realm.objects(entity)
+            if sortKey != nil {
+                objects = objects.sorted(byKeyPath: sortKey!, ascending: isAscending)
+            }
+            return objects
         }
-        return objects
-    }
     
     func delete<S>(_ objects: S) where S : Sequence, S.Element : Object {
         realm.beginWrite()
@@ -62,4 +66,9 @@ final class RealmManager: DatabaseServiceProtocol {
         realm.delete(object)
         try! realm.commitWrite()
     }
+    
+    func exists<T>(id: String, ofType: T.Type) -> Bool where T : Object {
+        realm.object(ofType: ofType, forPrimaryKey: id) != nil
+    }
+    
 }

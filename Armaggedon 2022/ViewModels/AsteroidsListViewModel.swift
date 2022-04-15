@@ -80,7 +80,9 @@ final class AsteroidsListViewModel: AsteroidListViewModelProtocol {
     }
     
     func addToDestroyList(_ id: String) {
-        print(responseAsteroids[id])
+        guard let asteroidModel = responseAsteroids[id],
+                !databaseManager.exists(id: id, ofType: AsteroidModel.self) else { return }
+        databaseManager.add(asteroidModel)
     }
     
     private func createAlert(with error: NetworkError) {

@@ -16,6 +16,10 @@ final class AsteroidModel: Object {
     @objc dynamic var potentiallyHazardouds = false
     @objc dynamic var missDistance: AsteroidDistance?
     
+    override class func primaryKey() -> String? {
+            return "id"
+        }
+    
     convenience init(
         name: String,
         id: String,
