@@ -9,13 +9,14 @@ import Foundation
 import Combine
 
 final class AsteroidsListViewModel: AsteroidListViewModelProtocol {
-    private var responseAsteroids = [AsteroidModel]()
+    private var responseAsteroids = [String: AsteroidModel]()
     private(set) var asteroids = CurrentValueSubject<[AsteroidCellModel], Never>([])
     @Published private(set) var error: String = ""
     var errorPublisher: Published<String>.Publisher { $error }
     
     private var cancellables = Set<AnyCancellable>()
-    private var dataManager: ServiceProtocol
+    private var networkManager: NetworkServiceProtocol
+    private var databaseManager: DatabaseServiceProtocol
     private var mapper: MapperProtocol
     private var updating = false
     private var onlyHazardous: Bool {
@@ -34,42 +35,52 @@ final class AsteroidsListViewModel: AsteroidListViewModelProtocol {
     }
     private var date = Date()
     
-    init(dataManager: ServiceProtocol = Service.shared, mapper: MapperProtocol = Mapper()) {
-        self.dataManager = dataManager
-        self.mapper = mapper
-        self.onlyHazardous = UserDefaults.standard.onlyHazardous
-        self.units = Constants.Units(rawValue: UserDefaults.standard.units)!
-
-        UserDefaults.standard
-            .publisher(for: \.units)
-            .sink { [weak self] rawValue in
-                self?.units = Constants.Units(rawValue: rawValue)!
-            }.store(in: &cancellables)
-        
-        UserDefaults.standard
-            .publisher(for: \.onlyHazardous)
-            .sink { [weak self] value in
-                self?.onlyHazardous = value
-            }.store(in: &cancellables)
-        
-        fetch()
-    }
+    init(
+        networkManager: NetworkServiceProtocol = NetworkManager.shared,
+        databaseManager: DatabaseServiceProtocol = RealmManager.shared,
+        mapper: MapperProtocol = Mapper()) {
+            self.networkManager = networkManager
+            self.databaseManager = databaseManager
+            self.mapper = mapper
+            self.onlyHazardous = UserDefaults.standard.onlyHazardous
+            self.units = Constants.Units(rawValue: UserDefaults.standard.units)!
+            
+            UserDefaults.standard
+                .publisher(for: \.units)
+                .sink { [weak self] rawValue in
+                    self?.units = Constants.Units(rawValue: rawValue)!
+                }.store(in: &cancellables)
+            
+            UserDefaults.standard
+                .publisher(for: \.onlyHazardous)
+                .sink { [weak self] value in
+                    self?.onlyHazardous = value
+                }.store(in: &cancellables)
+            
+            fetch()
+        }
     
     func fetch() {
         guard !updating else { return }
         updating = true
-        dataManager.fetchAsteroids(startDate: self.mapper.dateForRequest(self.date), endDate: nil)
+        networkManager.fetchAsteroids(startDate: self.mapper.dateForRequest(self.date), endDate: nil)
             .sink { [weak self] dataResponse in
                 guard self != nil else { return }
                 if dataResponse.error != nil {
                     self!.createAlert(with: dataResponse.error!)
                 } else {
                     self!.date = Calendar.current.date(byAdding: .day, value: 7, to: self!.date)!
-                    self!.responseAsteroids += self!.mapper.asteroidsFromResponse(dataResponse.value!).sorted(by: { $0.approachDate < $1.approachDate })
+                    self!.mapper.asteroidsFromResponse(dataResponse.value!).forEach { (k, v) in
+                        self!.responseAsteroids[k] = v
+                    }
                     self!.update()
                 }
                 self!.updating = false
             }.store(in: &cancellables)
+    }
+    
+    func addToDestroyList(_ id: String) {
+        print(responseAsteroids[id])
     }
     
     private func createAlert(with error: NetworkError) {
@@ -78,11 +89,11 @@ final class AsteroidsListViewModel: AsteroidListViewModelProtocol {
     
     private func update() {
         if onlyHazardous {
-            asteroids.send(responseAsteroids.filter({ $0.potentiallyHazardouds }).compactMap {
+            asteroids.send(responseAsteroids.values.filter({ $0.potentiallyHazardouds }).sorted(by: {$0.approachDate < $1.approachDate}).compactMap {
                 self.mapper.asteroidModelToCellModel($0, units: units)
             })
         } else {
-            asteroids.send(responseAsteroids.compactMap {
+            asteroids.send(responseAsteroids.values.sorted(by: {$0.approachDate < $1.approachDate}).compactMap {
                 self.mapper.asteroidModelToCellModel($0, units: units)
             })
         }

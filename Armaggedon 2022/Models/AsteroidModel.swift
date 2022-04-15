@@ -6,17 +6,35 @@
 //
 
 import Foundation
+import RealmSwift
 
-struct AsteroidModel {
-    let name: String
-    let id: String
-    let approachDate: Date
-    let estimatedDiameter: Int
-    let potentiallyHazardouds: Bool
-    let missDistance: AsteroidDistance
+final class AsteroidModel: Object {
+    @objc dynamic var name = ""
+    @objc dynamic var id = ""
+    @objc dynamic var approachDate = Date()
+    @objc dynamic var estimatedDiameter = 0
+    @objc dynamic var potentiallyHazardouds = false
+    @objc dynamic var missDistance: AsteroidDistance?
+    
+    convenience init(
+        name: String,
+        id: String,
+        approachDate: Date,
+        estimatedDiemeter: Int,
+        potentiallyHazardouds: Bool,
+        missDistance: AsteroidDistance
+    ) {
+        self.init()
+        self.name = name
+        self.id = id
+        self.approachDate = approachDate
+        self.estimatedDiameter = estimatedDiemeter
+        self.potentiallyHazardouds = potentiallyHazardouds
+        self.missDistance = missDistance
+    }
 }
 
-struct AsteroidDistance {
-    let kilometers: Int
-    let lunar: Int
+final class AsteroidDistance: Object {
+    @objc dynamic var kilometers = 0
+    @objc dynamic var lunar = 0
 }

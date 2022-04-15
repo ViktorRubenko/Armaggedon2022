@@ -11,4 +11,5 @@ import Combine
 protocol AsteroidListViewModelProtocol: ViewModelProtocol {
     var asteroids: CurrentValueSubject<[AsteroidCellModel], Never> { get }
     var errorPublisher: Published<String>.Publisher { get }
+    func addToDestroyList(_ id: String)
 }

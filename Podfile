@@ -6,4 +6,5 @@ target 'Armaggedon 2022' do
     pod 'SnapKit', '~> 5.0.0'
     pod 'Alamofire', '~> 5.5'
     pod 'XMLCoder', '~> 0.13.1'
+    pod 'RealmSwift'
 end

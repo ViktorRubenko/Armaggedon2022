@@ -10,13 +10,13 @@ import Combine
 import Alamofire
 import XMLCoder
 
-protocol ServiceProtocol {
+protocol NetworkServiceProtocol {
     func fetchAsteroids(startDate: String, endDate: String?) -> AnyPublisher<DataResponse<ResponseModel, NetworkError>, Never>
 }
 
 
-final class Service {
-    static let shared: ServiceProtocol = Service()
+final class NetworkManager {
+    static let shared: NetworkServiceProtocol = NetworkManager()
     private init() {}
     
     private enum Constants {
@@ -25,7 +25,7 @@ final class Service {
     }
 }
 
-extension Service: ServiceProtocol {
+extension NetworkManager: NetworkServiceProtocol {
     func createURL(params: String) -> URL? {
         URL(string: "\(Constants.apiURL)\(params)&api_key=\(Constants.apiKey)")
     }

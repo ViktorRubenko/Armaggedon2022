@@ -35,6 +35,7 @@ class AsteroidCell: UICollectionViewCell {
         button.setTitle("УНИЧТОЖИТЬ", for: .normal)
         return button
     }()
+    var destroyButtonHandler: (() -> Void)?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -82,6 +83,7 @@ extension AsteroidCell {
             make.bottom.equalToSuperview().offset(-19)
         }
         
+        destroyButton.addTarget(self, action: #selector(didTapDestroyButton), for: .touchUpInside)
         destroyButton.snp.makeConstraints { make in
             make.height.equalTo(28)
             make.width.equalTo(121)
@@ -108,5 +110,11 @@ extension AsteroidCell {
             hazardousString.append(NSAttributedString(string: "не опасен"))
         }
         hazardousLabel.attributedText = hazardousString
+    }
+}
+// MARK: - Actions
+extension AsteroidCell {
+    @objc func didTapDestroyButton() {
+        destroyButtonHandler?()
     }
 }

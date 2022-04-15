@@ -111,7 +111,11 @@ extension AsteroidsListViewController {
 extension AsteroidsListViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AsteroidCell.identifier, for: indexPath) as! AsteroidCell
-        cell.configure(viewModel.asteroids.value[indexPath.row])
+        let model = viewModel.asteroids.value[indexPath.row]
+        cell.configure(model)
+        cell.destroyButtonHandler = { [weak self] in
+            self?.viewModel.addToDestroyList(model.id)
+        }
         return cell
     }
     

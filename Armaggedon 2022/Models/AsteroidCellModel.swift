@@ -8,6 +8,7 @@
 import Foundation
 
 struct AsteroidCellModel {
+    let id: String
     let name: String
     let distanceString: String
     let dateString: String
