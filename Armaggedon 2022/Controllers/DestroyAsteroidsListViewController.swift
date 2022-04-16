@@ -72,17 +72,7 @@ class DestroyAsteroidsListViewController: UIViewController {
     }
 }
 // MARK: - Methods
-extension DestroyAsteroidsListViewController {
-    private func createLayout() -> UICollectionViewCompositionalLayout {
-        let size = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(44))
-        let item = NSCollectionLayoutItem(layoutSize: size)
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: size, subitems: [item])
-        let section = NSCollectionLayoutSection(group: group)
-        section.interGroupSpacing = 10
-        section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
-        return UICollectionViewCompositionalLayout(section: section)
-    }
-    
+extension DestroyAsteroidsListViewController {    
     private func setupViews() {
         let safeArea = view.safeAreaLayoutGuide
         view.backgroundColor = .white
