@@ -39,6 +39,16 @@ class DestroyAsteroidsListViewController: UIViewController {
         button.isHidden = true
         return button
     }()
+    private let noAstroidsLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 30, weight: .bold)
+        label.text = "Астероидов пока нет..."
+        label.numberOfLines = 2
+        label.textColor = .darkGray
+        label.isHidden = true
+        label.textAlignment = .center
+        return label
+    }()
     
     init(viewModel: DestroyAsteroidsListViewModelProtocol) {
         self.viewModel = viewModel
@@ -90,6 +100,12 @@ extension DestroyAsteroidsListViewController {
             make.trailing.lessThanOrEqualTo(safeArea).offset(-10)
             make.centerX.equalTo(safeArea)
         }
+        
+        view.addSubview(noAstroidsLabel)
+        noAstroidsLabel.snp.makeConstraints { make in
+            make.center.equalTo(tableView)
+            make.width.equalTo(tableView).multipliedBy(0.8)
+        }
     }
     
     private func setupNavigationBar() {
@@ -106,6 +122,7 @@ extension DestroyAsteroidsListViewController {
         viewModel.asteroidsToDestroy.sink { [weak self] asteroids in
             self?.tableView.reloadData()
             self?.sendBrigadeButton.isHidden = asteroids.isEmpty
+            self?.noAstroidsLabel.isHidden = !asteroids.isEmpty
         }.store(in: &cancellables)
     }
 }
