@@ -23,6 +23,22 @@ class DestroyAsteroidsListViewController: UIViewController {
         tableView.estimatedRowHeight = 44.0
         return tableView
     }()
+    private lazy var sendBrigadeButton: UIButton = {
+        var config = UIButton.Configuration.filled()
+        config.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
+        config.title = "Заказ бригады им. Брюса Уиллиса"
+        let button = UIButton(configuration: config, primaryAction: nil)
+        button.setTitleColor(Constants.Colors.secondaryLabelColor, for: .normal)
+        button.titleLabel?.numberOfLines = 2
+        button.backgroundColor = Constants.Colors.destroyButtonColor
+        button.layer.cornerRadius = 10
+        button.addTarget(self, action: #selector(didTapBridageButton), for: .touchUpInside)
+        button.layer.shadowColor = UIColor.lightGray.cgColor
+        button.layer.shadowOpacity = 1
+        button.layer.shadowRadius = 10
+        button.isHidden = true
+        return button
+    }()
     
     init(viewModel: DestroyAsteroidsListViewModelProtocol) {
         self.viewModel = viewModel
@@ -49,6 +65,11 @@ class DestroyAsteroidsListViewController: UIViewController {
         super.setEditing(editing, animated: animated)
         tableView.setEditing(editing, animated: animated)
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        tableView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: sendBrigadeButton.bounds.height + 15, right: 0)
+    }
 }
 // MARK: - Methods
 extension DestroyAsteroidsListViewController {
@@ -63,13 +84,21 @@ extension DestroyAsteroidsListViewController {
     }
     
     private func setupViews() {
+        let safeArea = view.safeAreaLayoutGuide
         view.backgroundColor = .white
         
         view.addSubview(tableView)
-        tableView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 30, right: 0)
         tableView.backgroundColor = .white
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
+        }
+        
+        view.addSubview(sendBrigadeButton)
+        sendBrigadeButton.snp.makeConstraints { make in
+            make.bottom.equalTo(safeArea).offset(-10)
+            make.leading.greaterThanOrEqualTo(safeArea).offset(10)
+            make.trailing.lessThanOrEqualTo(safeArea).offset(-10)
+            make.centerX.equalTo(safeArea)
         }
     }
     
@@ -84,8 +113,9 @@ extension DestroyAsteroidsListViewController {
     }
     
     private func setupBinders() {
-        viewModel.asteroidsToDestroy.sink { [weak self] _ in
+        viewModel.asteroidsToDestroy.sink { [weak self] asteroids in
             self?.tableView.reloadData()
+            self?.sendBrigadeButton.isHidden = asteroids.isEmpty
         }.store(in: &cancellables)
     }
 }
@@ -94,6 +124,14 @@ extension DestroyAsteroidsListViewController {
     @objc func didTapEditButton(_ sender: UIBarButtonItem) {
         sender.title = tableView.isEditing ? "Изменить" : "Готово"
         setEditing(!tableView.isEditing, animated: true)
+    }
+    @objc func didTapBridageButton() {
+        let alert = UIAlertController(
+            title: "Бригада заказана!",
+            message: "Бригада будет доставлена на асторид в нужный момент для его уничтожения!",
+            preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alert, animated: true)
     }
 }
 // MARK: - UICollectionView Delegate/DS
