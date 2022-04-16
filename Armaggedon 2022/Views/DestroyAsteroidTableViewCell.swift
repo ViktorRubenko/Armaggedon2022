@@ -33,7 +33,6 @@ class DestroyAsteroidTableViewCell: UITableViewCell {
         label.textAlignment = .right
         return label
     }()
-    private var needsSetGradient = true
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -46,14 +45,11 @@ class DestroyAsteroidTableViewCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        if needsSetGradient {
-            needsSetGradient.toggle()
-            gradientView.layoutIfNeeded()
-            diameterLabel.layoutIfNeeded()
-            gradientLayer.frame = gradientView.bounds
-            gradientLayer.startPoint = CGPoint(x: 0.33, y: 0.5)
-            gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.5)
-        }
+        gradientView.layoutIfNeeded()
+        diameterLabel.layoutIfNeeded()
+        gradientLayer.frame = gradientView.bounds
+        gradientLayer.startPoint = CGPoint(x: 0.33, y: 0.5)
+        gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.5)
     }
 }
 // MAKR: - Methods

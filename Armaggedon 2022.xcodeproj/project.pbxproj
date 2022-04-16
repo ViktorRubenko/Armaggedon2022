@@ -26,7 +26,7 @@
 		E3FAED9028079253008CDAF4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FAED8E28079253008CDAF4 /* AppDelegate.swift */; };
 		E3FAED9128079253008CDAF4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FAED8F28079253008CDAF4 /* SceneDelegate.swift */; };
 		E3FAED942807925D008CDAF4 /* AsteroidsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FAED932807925D008CDAF4 /* AsteroidsListViewController.swift */; };
-		E3FAED9628084794008CDAF4 /* AsteroidCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FAED9528084794008CDAF4 /* AsteroidCell.swift */; };
+		E3FAED9628084794008CDAF4 /* AsteroidCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FAED9528084794008CDAF4 /* AsteroidCollectionViewCell.swift */; };
 		E3FAED9A28084C3C008CDAF4 /* HeaderApproachView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FAED9928084C3C008CDAF4 /* HeaderApproachView.swift */; };
 		E3FAED9C28086F50008CDAF4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FAED9B28086F50008CDAF4 /* Constants.swift */; };
 		E3FAED9E28087469008CDAF4 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FAED9D28087469008CDAF4 /* Extensions.swift */; };
@@ -63,7 +63,7 @@
 		E3FAED8E28079253008CDAF4 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E3FAED8F28079253008CDAF4 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		E3FAED932807925D008CDAF4 /* AsteroidsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsteroidsListViewController.swift; sourceTree = "<group>"; };
-		E3FAED9528084794008CDAF4 /* AsteroidCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsteroidCell.swift; sourceTree = "<group>"; };
+		E3FAED9528084794008CDAF4 /* AsteroidCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsteroidCollectionViewCell.swift; sourceTree = "<group>"; };
 		E3FAED9928084C3C008CDAF4 /* HeaderApproachView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderApproachView.swift; sourceTree = "<group>"; };
 		E3FAED9B28086F50008CDAF4 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		E3FAED9D28087469008CDAF4 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -160,7 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				E3FAED6E28079059008CDAF4 /* LaunchScreen.storyboard */,
-				E3FAED9528084794008CDAF4 /* AsteroidCell.swift */,
+				E3FAED9528084794008CDAF4 /* AsteroidCollectionViewCell.swift */,
 				E3FAED9928084C3C008CDAF4 /* HeaderApproachView.swift */,
 				E3FAEDB6280961D3008CDAF4 /* UnitsFilterTableViewCell.swift */,
 				E3BEBD6A280A0FE100F912D0 /* DestroyAsteroidTableViewCell.swift */,
@@ -347,7 +347,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E31750AE2809DA1D00462A3F /* DestroyAsteroidsListViewModel.swift in Sources */,
-				E3FAED9628084794008CDAF4 /* AsteroidCell.swift in Sources */,
+				E3FAED9628084794008CDAF4 /* AsteroidCollectionViewCell.swift in Sources */,
 				E3FAED7E28079105008CDAF4 /* NetworkError.swift in Sources */,
 				E3FAEDB02808C241008CDAF4 /* FilterViewModel.swift in Sources */,
 				E3BEBD6B280A0FE100F912D0 /* DestroyAsteroidTableViewCell.swift in Sources */,

@@ -17,7 +17,7 @@ final class AsteroidsListViewController: UIViewController {
             collectionViewLayout: self.createLayout())
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.register(AsteroidCell.self, forCellWithReuseIdentifier: AsteroidCell.identifier)
+        collectionView.register(AsteroidCollectionViewCell.self, forCellWithReuseIdentifier: AsteroidCollectionViewCell.identifier)
         return collectionView
     }()
     private let loadIndicator: UIActivityIndicatorView = {
@@ -110,7 +110,7 @@ extension AsteroidsListViewController {
 // MARK: - TableView Delegate/DS
 extension AsteroidsListViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AsteroidCell.identifier, for: indexPath) as! AsteroidCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AsteroidCollectionViewCell.identifier, for: indexPath) as! AsteroidCollectionViewCell
         let model = viewModel.asteroids.value[indexPath.row]
         cell.configure(model)
         cell.destroyButtonHandler = { [weak self] in

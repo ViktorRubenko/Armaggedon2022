@@ -1,5 +1,5 @@
 //
-//  AsteroidCell.swift
+//  AsteroidCollectionViewCell.swift
 //  Armaggedon 2022
 //
 //  Created by Victor Rubenko on 14.04.2022.
@@ -7,8 +7,8 @@
 
 import UIKit
 
-class AsteroidCell: UICollectionViewCell {
-    static let identifier = "AsteroidCell"
+class AsteroidCollectionViewCell: UICollectionViewCell {
+    static let identifier = "AsteroidCollectionViewCell"
     private let headerView: HeaderApproachView = {
         let view = HeaderApproachView()
         view.clipsToBounds = true
@@ -47,7 +47,7 @@ class AsteroidCell: UICollectionViewCell {
     }
 }
 // MARK: - Methods
-extension AsteroidCell {
+extension AsteroidCollectionViewCell {
     private func setupViews() {
         backgroundColor = .white
         
@@ -113,7 +113,7 @@ extension AsteroidCell {
     }
 }
 // MARK: - Actions
-extension AsteroidCell {
+extension AsteroidCollectionViewCell {
     @objc func didTapDestroyButton() {
         UIView.animate(
             withDuration: 0.05,
