@@ -11,16 +11,17 @@ import Combine
 class DestroyAsteroidsListViewController: UIViewController {
     private var cancellables = Set<AnyCancellable>()
     private let viewModel: DestroyAsteroidsListViewModelProtocol!
-    private lazy var collectionView: UICollectionView = {
-        let collectionView = UICollectionView(
-            frame: .zero,
-            collectionViewLayout: self.createLayout())
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        collectionView.register(
-            DestroyAsteroidCollectionViewCell.self,
-            forCellWithReuseIdentifier: DestroyAsteroidCollectionViewCell.identifier)
-        return collectionView
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(
+            DestroyAsteroidTableViewCell.self,
+            forCellReuseIdentifier: DestroyAsteroidTableViewCell.identifier)
+        tableView.separatorStyle = .none
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 44.0
+        return tableView
     }()
     
     init(viewModel: DestroyAsteroidsListViewModelProtocol) {
@@ -43,6 +44,11 @@ class DestroyAsteroidsListViewController: UIViewController {
         super.viewWillAppear(animated)
         viewModel.fetch()
     }
+    
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        tableView.setEditing(editing, animated: animated)
+    }
 }
 // MARK: - Methods
 extension DestroyAsteroidsListViewController {
@@ -59,39 +65,61 @@ extension DestroyAsteroidsListViewController {
     private func setupViews() {
         view.backgroundColor = .white
         
-        view.addSubview(collectionView)
-        collectionView.backgroundColor = .white
-        collectionView.snp.makeConstraints { make in
+        view.addSubview(tableView)
+        tableView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 30, right: 0)
+        tableView.backgroundColor = .white
+        tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
     }
     
     private func setupNavigationBar() {
         title = "На уничтожение"
+        let editButton = UIBarButtonItem(
+            title: "Изменить",
+            style: .plain,
+            target: self,
+            action: #selector(didTapEditButton(_:)))
+        navigationItem.leftBarButtonItem = editButton
     }
     
     private func setupBinders() {
         viewModel.asteroidsToDestroy.sink { [weak self] _ in
-            self?.collectionView.reloadData()
+            self?.tableView.reloadData()
         }.store(in: &cancellables)
     }
 }
 // MARK: - Actions
 extension DestroyAsteroidsListViewController {
-    
+    @objc func didTapEditButton(_ sender: UIBarButtonItem) {
+        sender.title = tableView.isEditing ? "Изменить" : "Готово"
+        setEditing(!tableView.isEditing, animated: true)
+    }
 }
 // MARK: - UICollectionView Delegate/DS
-extension DestroyAsteroidsListViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+extension DestroyAsteroidsListViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         viewModel.asteroidsToDestroy.value.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: DestroyAsteroidCollectionViewCell.identifier,
-            for: indexPath) as! DestroyAsteroidCollectionViewCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(
+            withIdentifier: DestroyAsteroidTableViewCell.identifier,
+            for: indexPath) as! DestroyAsteroidTableViewCell
         let model = viewModel.asteroidsToDestroy.value[indexPath.row]
         cell.configure(model)
+        cell.selectionStyle = .none
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            cancellables.removeAll()
+            viewModel.removeFromList(indexPath.row)
+            tableView.performBatchUpdates {
+                tableView.deleteRows(at: [indexPath], with: .fade)
+            }
+            setupBinders()
+        }
     }
 }

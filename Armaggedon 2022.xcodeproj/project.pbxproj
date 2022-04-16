@@ -12,7 +12,7 @@
 		E31750AA2809D9C400462A3F /* DestroyAsteroidsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31750A92809D9C400462A3F /* DestroyAsteroidsListViewController.swift */; };
 		E31750AC2809DA0100462A3F /* DestroyAsteroidsListViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31750AB2809DA0100462A3F /* DestroyAsteroidsListViewModelProtocol.swift */; };
 		E31750AE2809DA1D00462A3F /* DestroyAsteroidsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31750AD2809DA1D00462A3F /* DestroyAsteroidsListViewModel.swift */; };
-		E3BEBD6B280A0FE100F912D0 /* DestroyAsteroidCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3BEBD6A280A0FE100F912D0 /* DestroyAsteroidCollectionViewCell.swift */; };
+		E3BEBD6B280A0FE100F912D0 /* DestroyAsteroidTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3BEBD6A280A0FE100F912D0 /* DestroyAsteroidTableViewCell.swift */; };
 		E3FAED6D28079059008CDAF4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3FAED6C28079059008CDAF4 /* Assets.xcassets */; };
 		E3FAED7028079059008CDAF4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3FAED6E28079059008CDAF4 /* LaunchScreen.storyboard */; };
 		E3FAED7D28079105008CDAF4 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FAED7B28079105008CDAF4 /* NetworkService.swift */; };
@@ -47,7 +47,7 @@
 		E31750A92809D9C400462A3F /* DestroyAsteroidsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestroyAsteroidsListViewController.swift; sourceTree = "<group>"; };
 		E31750AB2809DA0100462A3F /* DestroyAsteroidsListViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestroyAsteroidsListViewModelProtocol.swift; sourceTree = "<group>"; };
 		E31750AD2809DA1D00462A3F /* DestroyAsteroidsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestroyAsteroidsListViewModel.swift; sourceTree = "<group>"; };
-		E3BEBD6A280A0FE100F912D0 /* DestroyAsteroidCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestroyAsteroidCollectionViewCell.swift; sourceTree = "<group>"; };
+		E3BEBD6A280A0FE100F912D0 /* DestroyAsteroidTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestroyAsteroidTableViewCell.swift; sourceTree = "<group>"; };
 		E3FAED6028079057008CDAF4 /* Armaggedon 2022.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Armaggedon 2022.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3FAED6C28079059008CDAF4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E3FAED6F28079059008CDAF4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -163,7 +163,7 @@
 				E3FAED9528084794008CDAF4 /* AsteroidCell.swift */,
 				E3FAED9928084C3C008CDAF4 /* HeaderApproachView.swift */,
 				E3FAEDB6280961D3008CDAF4 /* UnitsFilterTableViewCell.swift */,
-				E3BEBD6A280A0FE100F912D0 /* DestroyAsteroidCollectionViewCell.swift */,
+				E3BEBD6A280A0FE100F912D0 /* DestroyAsteroidTableViewCell.swift */,
 				E3FAEDB828097066008CDAF4 /* HazardousFilterTableViewCell.swift */,
 			);
 			path = Views;
@@ -350,7 +350,7 @@
 				E3FAED9628084794008CDAF4 /* AsteroidCell.swift in Sources */,
 				E3FAED7E28079105008CDAF4 /* NetworkError.swift in Sources */,
 				E3FAEDB02808C241008CDAF4 /* FilterViewModel.swift in Sources */,
-				E3BEBD6B280A0FE100F912D0 /* DestroyAsteroidCollectionViewCell.swift in Sources */,
+				E3BEBD6B280A0FE100F912D0 /* DestroyAsteroidTableViewCell.swift in Sources */,
 				E3FAED8628079209008CDAF4 /* Mapper.swift in Sources */,
 				E3FAED8B2807922B008CDAF4 /* AsteroidListViewModelProtocol.swift in Sources */,
 				E3FAED9A28084C3C008CDAF4 /* HeaderApproachView.swift in Sources */,

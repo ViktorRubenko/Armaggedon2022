@@ -39,9 +39,9 @@ final class DestroyAsteroidsListViewModel: DestroyAsteroidsListViewModelProtocol
     }
     
     func removeFromList(_ index: Int) {
-        asteroids.remove(at: index)
         asteroidsToDestroy.value.remove(at: index)
         databaseManager.delete(asteroids[index])
+        asteroids.remove(at: index)
     }
     
     func orderBrigate() {

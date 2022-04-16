@@ -7,11 +7,11 @@
 
 import UIKit
 
-class DestroyAsteroidCollectionViewCell: UICollectionViewCell {
+class DestroyAsteroidTableViewCell: UITableViewCell {
     
-    static let identifier = "DestroyAsteroidCollectionViewCell"
+    static let identifier = "DestroyAsteroidTableViewCell"
     
-    private let bgView = UIView()
+    private let innerContentView = UIView()
     private let gradientView: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 10
@@ -35,8 +35,8 @@ class DestroyAsteroidCollectionViewCell: UICollectionViewCell {
     }()
     private var needsSetGradient = true
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
     }
     
@@ -53,31 +53,32 @@ class DestroyAsteroidCollectionViewCell: UICollectionViewCell {
             gradientLayer.frame = gradientView.bounds
             gradientLayer.startPoint = CGPoint(x: 0.33, y: 0.5)
             gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.5)
-            
-            bgView.layoutIfNeeded()
-            
-//            bgView.layer.cornerRadius = 10
-//            bgView.layer.shadowColor = UIColor.gray.cgColor
-//            bgView.layer.shadowOpacity = 10
-//            bgView.layer.shadowOffset = .zero
-//            backgroundView.layer.shadowPath = UIBezierPath(rect: bounds).cgPath
         }
     }
 }
 // MAKR: - Methods
-extension DestroyAsteroidCollectionViewCell {
+extension DestroyAsteroidTableViewCell {
     private func setupViews() {
-        backgroundColor = .white
-        layer.cornerRadius = 10
-        layer.shadowColor = UIColor.lightGray.cgColor
-        layer.shadowOpacity = 10
-        layer.shadowOffset = .zero
+        backgroundColor = .clear
         
-        contentView.addSubview(gradientView)
+        contentView.addSubview(innerContentView)
+        innerContentView.addSubview(gradientView)
         gradientView.addSubview(nameLabel)
         gradientView.addSubview(hazardousLabel)
-        contentView.addSubview(diameterLabel)
-        contentView.addSubview(dateLabel)
+        innerContentView.addSubview(diameterLabel)
+        innerContentView.addSubview(dateLabel)
+        
+        innerContentView.layer.cornerRadius = 10
+        innerContentView.layer.shadowColor = UIColor.lightGray.cgColor
+        innerContentView.layer.shadowOpacity = 10
+        innerContentView.layer.shadowOffset = .zero
+        innerContentView.backgroundColor = .white
+        innerContentView.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(8)
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+            make.bottom.equalToSuperview().offset(-8).priority(.low)
+        }
         
         gradientView.layer.insertSublayer(gradientLayer, at: 0)
         gradientView.snp.makeConstraints { make in
