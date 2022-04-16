@@ -36,7 +36,7 @@ class AsteroidCell: UICollectionViewCell {
         return button
     }()
     var destroyButtonHandler: (() -> Void)?
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
@@ -115,6 +115,20 @@ extension AsteroidCell {
 // MARK: - Actions
 extension AsteroidCell {
     @objc func didTapDestroyButton() {
-        destroyButtonHandler?()
+        UIView.animate(
+            withDuration: 0.05,
+            animations: {
+                self.destroyButton.backgroundColor = .red
+            }, completion: { _ in
+                UIView.animate(
+                    withDuration: 0.05,
+                    animations: {
+                        self.destroyButton.backgroundColor = Constants.Colors.destroyButtonColor
+                    },
+                    completion: { _ in
+                        self.destroyButtonHandler?()
+                    })
+            })
     }
 }
+

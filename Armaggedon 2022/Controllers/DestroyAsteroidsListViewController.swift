@@ -145,7 +145,7 @@ extension DestroyAsteroidsListViewController: UITableViewDelegate, UITableViewDa
             cancellables.removeAll()
             viewModel.removeFromList(indexPath.row)
             tableView.performBatchUpdates {
-                tableView.deleteRows(at: [indexPath], with: .fade)
+                tableView.deleteRows(at: [indexPath], with: .automatic)
             }
             setupBinders()
         }
