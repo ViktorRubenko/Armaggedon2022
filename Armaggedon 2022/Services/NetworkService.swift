@@ -48,8 +48,8 @@ extension NetworkManager: NetworkServiceProtocol {
     }
     
     func fetchAsteroid(id: String) -> AnyPublisher<DataResponse<NearEarthObject, NetworkError>, Never> {
-        let url = createURL(params: "neo/\(id)?")!
-        
+        let url = createURL(params: "/neo/\(id)?")!
+        print(url)
         return AF.request(url, method: .get)
             .validate()
             .publishDecodable(type: NearEarthObject.self)

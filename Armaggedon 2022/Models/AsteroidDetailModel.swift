@@ -7,12 +7,10 @@
 
 import Foundation
 
-struct AsteroidDetailModel {
-    let id: String
+struct AsteroidInfo {
     let name: String
     let diameter: Int
     let hazardous: Bool
-    let approachData: [ApproachData]
 }
 
 struct ApproachData {

@@ -85,6 +85,10 @@ final class AsteroidsListViewModel: AsteroidListViewModelProtocol {
         databaseManager.add(AsteroidModel(value: asteroidModel))
     }
     
+    func getResponseModel(_ id: String) -> AsteroidModel? {
+        responseAsteroids[id]
+    }
+    
     private func createAlert(with error: NetworkError) {
         self.error = error.backendError == nil ? error.initialError.localizedDescription : error.backendError!.errorMessage
     }

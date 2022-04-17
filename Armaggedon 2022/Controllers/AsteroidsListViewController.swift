@@ -129,4 +129,10 @@ extension AsteroidsListViewController: UICollectionViewDelegate, UICollectionVie
             viewModel.fetch()
         }
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let model = viewModel.asteroids.value[indexPath.row]
+        let vc = AsteroidDetailViewController(viewModel: AsteroidDetailViewModel(asteroidModel: viewModel.getResponseModel(model.id)!))
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }

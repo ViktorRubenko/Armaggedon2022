@@ -11,7 +11,8 @@ import Combine
 final class AsteroidDetailViewModel: AsteroidDetailViewModelProtocol {
     @Published private(set) var error: String = ""
     var errorPublisher: Published<String>.Publisher { $error }
-    private(set) var asteroid = CurrentValueSubject<AsteroidDetailModel?, Never>(nil)
+    private(set) var asteroidApproachData = CurrentValueSubject<[ApproachData], Never>([])
+    private(set) var asteroid = CurrentValueSubject<AsteroidModel?, Never>(nil)
     
     private var cancellables = Set<AnyCancellable>()
     private var networkManager: NetworkServiceProtocol
@@ -26,12 +27,13 @@ final class AsteroidDetailViewModel: AsteroidDetailViewModelProtocol {
         }
     }
     
-    init(id: String, networkManager: NetworkServiceProtocol = NetworkManager.shared, mapper: MapperProtocol = Mapper()) {
-        self.id = id
+    init(asteroidModel: AsteroidModel, networkManager: NetworkServiceProtocol = NetworkManager.shared, mapper: MapperProtocol = Mapper()) {
+        self.id = asteroidModel.id
         self.networkManager = networkManager
         self.mapper = mapper
         self.units = .kilometers
         
+        asteroid.send(asteroidModel)
         UserDefaults.standard
             .publisher(for: \.units)
             .sink { [weak self] rawValue in
@@ -55,7 +57,8 @@ final class AsteroidDetailViewModel: AsteroidDetailViewModelProtocol {
     }
     
     private func update() {
-        asteroid.send(mapper.asteroidDetailCellFromResponse(responseModel, units: units))
+        guard let responseModel = responseModel else { return }
+        asteroidApproachData.send(mapper.asteroidDetailCellFromResponse(responseModel, units: units))
     }
     
     private func createAlert(with error: NetworkError) {

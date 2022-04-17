@@ -9,6 +9,7 @@ import Foundation
 import Combine
 
 protocol AsteroidDetailViewModelProtocol: ViewModelProtocol {
-    var asteroid: CurrentValueSubject<AsteroidDetailModel?, Never> { get }
+    var asteroid: CurrentValueSubject<AsteroidModel?, Never> { get }
+    var asteroidApproachData: CurrentValueSubject<[ApproachData], Never> { get }
     var errorPublisher: Published<String>.Publisher { get }
 }
