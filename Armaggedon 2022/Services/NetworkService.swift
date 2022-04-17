@@ -12,6 +12,7 @@ import XMLCoder
 
 protocol NetworkServiceProtocol {
     func fetchAsteroids(startDate: String, endDate: String?) -> AnyPublisher<DataResponse<ResponseModel, NetworkError>, Never>
+    func fetchAsteroid(id: String) -> AnyPublisher<DataResponse<NearEarthObject, NetworkError>, Never>
 }
 
 
@@ -36,6 +37,22 @@ extension NetworkManager: NetworkServiceProtocol {
         return AF.request(url, method: .get)
             .validate()
             .publishDecodable(type: ResponseModel.self)
+            .map { response in
+                response.mapError { error in
+                    let backendError = response.data.flatMap { try? XMLDecoder().decode(BackendError.self, from: $0) }
+                    return NetworkError(initialError: error, backendError: backendError)
+                }
+            }
+            .receive(on: DispatchQueue.main)
+            .eraseToAnyPublisher()
+    }
+    
+    func fetchAsteroid(id: String) -> AnyPublisher<DataResponse<NearEarthObject, NetworkError>, Never> {
+        let url = createURL(params: "neo/\(id)?")!
+        
+        return AF.request(url, method: .get)
+            .validate()
+            .publishDecodable(type: NearEarthObject.self)
             .map { response in
                 response.mapError { error in
                     let backendError = response.data.flatMap { try? XMLDecoder().decode(BackendError.self, from: $0) }

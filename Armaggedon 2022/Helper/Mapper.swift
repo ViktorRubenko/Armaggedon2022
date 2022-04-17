@@ -10,6 +10,7 @@ import Foundation
 protocol MapperProtocol {
     func asteroidsFromResponse(_ response: ResponseModel) -> [String: AsteroidModel]
     func asteroidModelToCellModel(_ asteroidModel: AsteroidModel, units: Constants.Units) -> AsteroidCellModel
+    func asteroidDetailCellFromResponse(_ response: NearEarthObject, units: Constants.Units) -> AsteroidDetailModel
     func dateForRequest(_ date: Date) -> String
 }
 
@@ -55,6 +56,22 @@ final class Mapper: MapperProtocol {
             dateString: formatDate(asteroidModel.approachDate),
             diameter: asteroidModel.estimatedDiameter,
             hazardous: asteroidModel.potentiallyHazardouds)
+    }
+    
+    func asteroidDetailCellFromResponse(_ response: NearEarthObject, units: Constants.Units) -> AsteroidDetailModel {
+        let matches = response.name.match("\\((.*?)\\)")
+        return AsteroidDetailModel(
+            id: response.neoReferenceID,
+            name: matches.first != nil ? matches.first! : response.name,
+            diameter: Int(round(response.estimatedDiameter.meters.estimatedDiameterMin + response.estimatedDiameter.meters.estimatedDiameterMin)) / 2,
+            hazardous: response.isPotentiallyHazardousAsteroid,
+            approachData: response.closeApproachData.compactMap {
+                ApproachData(
+                    dateString: formatDate(Date(timeIntervalSince1970: TimeInterval($0.epochDateCloseApproach / 1000))),
+                    velocity: "\($0.relativeVelocity.kilometersPerHour) км/ч",
+                    distanceString: units == .kilometers ? "\($0.missDistance.kilometers) км" : "\($0.missDistance.lunar) лунных орбит",
+                    orbitingBody: $0.orbitingBody)
+            })
     }
     
     private func formatDate(_ date: Date) -> String {

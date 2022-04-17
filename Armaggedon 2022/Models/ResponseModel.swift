@@ -9,18 +9,11 @@ import Foundation
 
 // MARK: - ResponseModel
 struct ResponseModel: Codable {
-    let links: ResponseLinks
     let nearEarthObjects: [String: [NearEarthObject]]
 
     enum CodingKeys: String, CodingKey {
-        case links
         case nearEarthObjects = "near_earth_objects"
     }
-}
-
-// MARK: - ResponseLinks
-struct ResponseLinks: Codable {
-    let next, prev: String
 }
 
 // MARK: - NearEarthObject
@@ -43,11 +36,15 @@ struct NearEarthObject: Codable {
 // MARK: - CloseApproachDatum
 struct CloseApproachDatum: Codable {
     let epochDateCloseApproach: Int
+    let relativeVelocity: RelativeVelocity
     let missDistance: MissDistance
+    let orbitingBody: String
 
     enum CodingKeys: String, CodingKey {
         case epochDateCloseApproach = "epoch_date_close_approach"
+        case relativeVelocity = "relative_velocity"
         case missDistance = "miss_distance"
+        case orbitingBody = "orbiting_body"
     }
 }
 
@@ -68,5 +65,14 @@ struct DiamaterUnits: Codable {
     enum CodingKeys: String, CodingKey {
         case estimatedDiameterMin = "estimated_diameter_min"
         case estimatedDiameterMax = "estimated_diameter_max"
+    }
+}
+// MARK: - RelativeVelocity
+struct RelativeVelocity: Codable {
+    let kilometersPerSecond, kilometersPerHour: String
+
+    enum CodingKeys: String, CodingKey {
+        case kilometersPerSecond = "kilometers_per_second"
+        case kilometersPerHour = "kilometers_per_hour"
     }
 }

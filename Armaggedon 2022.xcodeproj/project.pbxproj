@@ -12,6 +12,9 @@
 		E31750AA2809D9C400462A3F /* DestroyAsteroidsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31750A92809D9C400462A3F /* DestroyAsteroidsListViewController.swift */; };
 		E31750AC2809DA0100462A3F /* DestroyAsteroidsListViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31750AB2809DA0100462A3F /* DestroyAsteroidsListViewModelProtocol.swift */; };
 		E31750AE2809DA1D00462A3F /* DestroyAsteroidsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31750AD2809DA1D00462A3F /* DestroyAsteroidsListViewModel.swift */; };
+		E33D483D280C5D680007E05F /* AsteroidDetailViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33D483C280C5D680007E05F /* AsteroidDetailViewModelProtocol.swift */; };
+		E33D483F280C5D890007E05F /* AsteroidDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33D483E280C5D890007E05F /* AsteroidDetailViewModel.swift */; };
+		E33D4841280C5DE40007E05F /* AsteroidDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33D4840280C5DE40007E05F /* AsteroidDetailModel.swift */; };
 		E3BEBD6B280A0FE100F912D0 /* DestroyAsteroidTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3BEBD6A280A0FE100F912D0 /* DestroyAsteroidTableViewCell.swift */; };
 		E3FAED6D28079059008CDAF4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3FAED6C28079059008CDAF4 /* Assets.xcassets */; };
 		E3FAED7028079059008CDAF4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3FAED6E28079059008CDAF4 /* LaunchScreen.storyboard */; };
@@ -47,6 +50,9 @@
 		E31750A92809D9C400462A3F /* DestroyAsteroidsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestroyAsteroidsListViewController.swift; sourceTree = "<group>"; };
 		E31750AB2809DA0100462A3F /* DestroyAsteroidsListViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestroyAsteroidsListViewModelProtocol.swift; sourceTree = "<group>"; };
 		E31750AD2809DA1D00462A3F /* DestroyAsteroidsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestroyAsteroidsListViewModel.swift; sourceTree = "<group>"; };
+		E33D483C280C5D680007E05F /* AsteroidDetailViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsteroidDetailViewModelProtocol.swift; sourceTree = "<group>"; };
+		E33D483E280C5D890007E05F /* AsteroidDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsteroidDetailViewModel.swift; sourceTree = "<group>"; };
+		E33D4840280C5DE40007E05F /* AsteroidDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsteroidDetailModel.swift; sourceTree = "<group>"; };
 		E3BEBD6A280A0FE100F912D0 /* DestroyAsteroidTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestroyAsteroidTableViewCell.swift; sourceTree = "<group>"; };
 		E3FAED6028079057008CDAF4 /* Armaggedon 2022.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Armaggedon 2022.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3FAED6C28079059008CDAF4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -182,9 +188,10 @@
 		E3FAED8128079114008CDAF4 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				E3FAED82280791E4008CDAF4 /* AsteroidModel.swift */,
 				E3FAED7F28079112008CDAF4 /* ResponseModel.swift */,
+				E3FAED82280791E4008CDAF4 /* AsteroidModel.swift */,
 				E3FAED9F280897C7008CDAF4 /* AsteroidCellModel.swift */,
+				E33D4840280C5DE40007E05F /* AsteroidDetailModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -206,6 +213,7 @@
 				E3FAED8A2807922B008CDAF4 /* AsteroidsListViewModel.swift */,
 				E3FAEDAF2808C241008CDAF4 /* FilterViewModel.swift */,
 				E31750AD2809DA1D00462A3F /* DestroyAsteroidsListViewModel.swift */,
+				E33D483E280C5D890007E05F /* AsteroidDetailViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -228,6 +236,7 @@
 				E3FAED892807922B008CDAF4 /* ViewModelProtocol.swift */,
 				E3FAEDA52808BDB2008CDAF4 /* FilterViewModelProtocol.swift */,
 				E31750AB2809DA0100462A3F /* DestroyAsteroidsListViewModelProtocol.swift */,
+				E33D483C280C5D680007E05F /* AsteroidDetailViewModelProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -354,6 +363,7 @@
 				E3FAED8628079209008CDAF4 /* Mapper.swift in Sources */,
 				E3FAED8B2807922B008CDAF4 /* AsteroidListViewModelProtocol.swift in Sources */,
 				E3FAED9A28084C3C008CDAF4 /* HeaderApproachView.swift in Sources */,
+				E33D483F280C5D890007E05F /* AsteroidDetailViewModel.swift in Sources */,
 				E31750AA2809D9C400462A3F /* DestroyAsteroidsListViewController.swift in Sources */,
 				E3FAED9028079253008CDAF4 /* AppDelegate.swift in Sources */,
 				E3FAEDA22808B6BA008CDAF4 /* TabBarController.swift in Sources */,
@@ -364,11 +374,13 @@
 				E3FAEDA62808BDB2008CDAF4 /* FilterViewModelProtocol.swift in Sources */,
 				E3FAED9E28087469008CDAF4 /* Extensions.swift in Sources */,
 				E3FAEDB7280961D3008CDAF4 /* UnitsFilterTableViewCell.swift in Sources */,
+				E33D483D280C5D680007E05F /* AsteroidDetailViewModelProtocol.swift in Sources */,
 				E3FAEDA42808BDA4008CDAF4 /* FilterViewController.swift in Sources */,
 				E3FAED7D28079105008CDAF4 /* NetworkService.swift in Sources */,
 				E31750AC2809DA0100462A3F /* DestroyAsteroidsListViewModelProtocol.swift in Sources */,
 				E3FAEDB928097066008CDAF4 /* HazardousFilterTableViewCell.swift in Sources */,
 				E31750A82809BAA100462A3F /* DatabaseService.swift in Sources */,
+				E33D4841280C5DE40007E05F /* AsteroidDetailModel.swift in Sources */,
 				E3FAED9C28086F50008CDAF4 /* Constants.swift in Sources */,
 				E3FAED942807925D008CDAF4 /* AsteroidsListViewController.swift in Sources */,
 				E3FAEDA0280897C7008CDAF4 /* AsteroidCellModel.swift in Sources */,
