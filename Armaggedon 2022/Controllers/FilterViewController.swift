@@ -16,6 +16,7 @@ class FilterViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = 44
+        tableView.allowsSelection = false
         return tableView
     }()
     
