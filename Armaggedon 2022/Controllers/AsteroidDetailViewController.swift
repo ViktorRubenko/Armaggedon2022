@@ -105,7 +105,7 @@ class AsteroidDetailViewController: UIViewController {
             gradientLayer.frame = topContainerView.bounds
             gradientLayer.startPoint = CGPoint(x: 0.5, y: 0.0)
             gradientLayer.endPoint = CGPoint(x: 0.5, y: 0.9)
-            maxOffset = topContainerView.frame.origin.y - destroyButton.frame.origin.y + 5
+            maxOffset = topContainerView.frame.origin.y - destroyButton.frame.origin.y - 5
         }
     }
 }
@@ -252,12 +252,11 @@ extension AsteroidDetailViewController: UICollectionViewDelegate, UICollectionVi
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let yOffset = scrollView.contentOffset.y
-        
         if yOffset >= 0 {
-            if destroyButton.frame.origin.y > view.safeAreaInsets.top + 10 {
+            if yOffset < abs(maxOffset) {
                 topContainerViewTopConstraint.update(offset: 10 - yOffset)
             } else {
-                topContainerViewTopConstraint.update(offset: maxOffset)
+                topContainerViewTopConstraint.update(offset: 10 + maxOffset )
             }
         } else if topContainerViewTopConstraint.layoutConstraints.first!.constant != 10 {
             topContainerViewTopConstraint.update(offset: 10)
