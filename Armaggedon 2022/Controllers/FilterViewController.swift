@@ -19,16 +19,16 @@ class FilterViewController: UIViewController {
         tableView.allowsSelection = false
         return tableView
     }()
-    
+
     init(viewModel: FilterViewModelProtocol) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
@@ -43,7 +43,7 @@ extension FilterViewController {
             make.edges.equalToSuperview()
         }
     }
-    
+
     private func setupNavigationBar() {
         title = "Фильтр"
         let backButton = UIBarButtonItem()
@@ -68,7 +68,7 @@ extension FilterViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         viewModel.cells.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellType = viewModel.cells[indexPath.row]
         switch cellType {

@@ -31,11 +31,11 @@ final class AsteroidsListViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
         self.viewModel = viewModel
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
@@ -48,20 +48,20 @@ extension AsteroidsListViewController {
     private func setupViews() {
         let safeArea = view.safeAreaLayoutGuide
         view.backgroundColor = .white
-        
+
         view.addSubview(collectionView)
         collectionView.backgroundColor = .clear
         collectionView.contentOffset.y = 200
         collectionView.snp.makeConstraints { make in
             make.edges.equalTo(safeArea)
         }
-        
+
         view.addSubview(loadIndicator)
         loadIndicator.snp.makeConstraints { make in
             make.center.equalTo(collectionView)
         }
     }
-    
+
     private func setupBinders() {
         viewModel.asteroids.sink { [weak self] asteroids in
             if !asteroids.isEmpty {
@@ -76,7 +76,7 @@ extension AsteroidsListViewController {
             self?.present(alert, animated: true)
         }.store(in: &cancellables)
     }
-    
+
     private func createLayout() -> UICollectionViewCompositionalLayout {
         let item = NSCollectionLayoutItem(
             layoutSize: NSCollectionLayoutSize(
@@ -93,7 +93,7 @@ extension AsteroidsListViewController {
         section.contentInsets = NSDirectionalEdgeInsets(top: 19.5, leading: 16, bottom: 19.5, trailing: 16)
         return UICollectionViewCompositionalLayout(section: section)
     }
-    
+
     private func setupNavigationBar() {
         title = "Армагеддон 2022"
         let rightButton = UIBarButtonItem(
@@ -122,18 +122,18 @@ extension AsteroidsListViewController: UICollectionViewDelegate, UICollectionVie
         }
         return cell
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         viewModel.asteroids.value.count
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        
+
         if (viewModel.asteroids.value.count - indexPath.row) < 5 {
             viewModel.fetch()
         }
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let model = viewModel.asteroids.value[indexPath.row]
         let vc = AsteroidDetailViewController(viewModel: AsteroidDetailViewModel(asteroidModel: viewModel.getResponseModel(model.id)!))

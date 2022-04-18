@@ -36,12 +36,12 @@ class AsteroidCollectionViewCell: UICollectionViewCell {
         return button
     }()
     var destroyButtonHandler: (() -> Void)?
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -50,12 +50,12 @@ class AsteroidCollectionViewCell: UICollectionViewCell {
 extension AsteroidCollectionViewCell {
     private func setupViews() {
         backgroundColor = .white
-        
+
         layer.cornerRadius = 10
         layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.0986753).cgColor
         layer.shadowOpacity = 1.0
         layer.shadowOffset = CGSize(width: 0, height: 0)
-        
+
         contentView.addSubview(headerView)
         contentView.addSubview(infoLabelStack)
         contentView.addSubview(hazardousLabel)
@@ -63,26 +63,26 @@ extension AsteroidCollectionViewCell {
         infoLabelStack.addArrangedSubview(diameterLabel)
         infoLabelStack.addArrangedSubview(dateLabel)
         infoLabelStack.addArrangedSubview(distanceLabel)
-        
+
         headerView.snp.makeConstraints { make in
             make.height.equalTo(145)
             make.top.equalToSuperview()
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
         }
-        
+
         infoLabelStack.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(16)
             make.top.equalTo(headerView.snp.bottom).offset(16)
             make.bottom.equalTo(hazardousLabel.snp.top).offset(-16)
         }
-        
+
         hazardousLabel.snp.makeConstraints { make in
             make.leading.equalTo(infoLabelStack)
             make.height.equalTo(24)
             make.bottom.equalToSuperview().offset(-19)
         }
-        
+
         destroyButton.addTarget(self, action: #selector(didTapDestroyButton), for: .touchUpInside)
         destroyButton.snp.makeConstraints { make in
             make.height.equalTo(28)
@@ -91,7 +91,7 @@ extension AsteroidCollectionViewCell {
             make.bottom.equalTo(-16)
         }
     }
-    
+
     func configure(_ model: AsteroidCellModel) {
         headerView.configure(
             name: model.name,
@@ -118,4 +118,3 @@ extension AsteroidCollectionViewCell {
         self.destroyButtonHandler?()
     }
 }
-

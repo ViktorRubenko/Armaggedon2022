@@ -13,7 +13,7 @@ final class AsteroidsListViewModel: AsteroidListViewModelProtocol {
     private(set) var asteroids = CurrentValueSubject<[AsteroidCellModel], Never>([])
     @Published private(set) var error: String = ""
     var errorPublisher: Published<String>.Publisher { $error }
-    
+
     private var cancellables = Set<AnyCancellable>()
     private var networkManager: NetworkServiceProtocol
     private var databaseManager: DatabaseServiceProtocol
@@ -35,7 +35,7 @@ final class AsteroidsListViewModel: AsteroidListViewModelProtocol {
     }
     private var idsToDestroy = Set<String>()
     private var date = Date()
-    
+
     init(
         networkManager: NetworkServiceProtocol = NetworkManager.shared,
         databaseManager: DatabaseServiceProtocol = RealmManager.shared,
@@ -46,27 +46,27 @@ final class AsteroidsListViewModel: AsteroidListViewModelProtocol {
             self.onlyHazardous = UserDefaults.standard.onlyHazardous
             self.units = Constants.Units(rawValue: UserDefaults.standard.units)!
             updateIdsToDestroy()
-            
+
             UserDefaults.standard
                 .publisher(for: \.units)
                 .sink { [weak self] rawValue in
                     self?.units = Constants.Units(rawValue: rawValue)!
                 }.store(in: &cancellables)
-            
+
             UserDefaults.standard
                 .publisher(for: \.onlyHazardous)
                 .sink { [weak self] value in
                     self?.onlyHazardous = value
                 }.store(in: &cancellables)
-            
+
             databaseManager.changes.sink { [weak self] _ in
                 self?.updateIdsToDestroy()
                 self?.update()
             }.store(in: &cancellables)
-            
+
             fetch()
         }
-    
+
     func fetch() {
         guard !updating else { return }
         updating = true
@@ -77,33 +77,33 @@ final class AsteroidsListViewModel: AsteroidListViewModelProtocol {
                     self!.createAlert(with: dataResponse.error!)
                 } else {
                     self!.date = Calendar.current.date(byAdding: .day, value: 7, to: self!.date)!
-                    self!.mapper.asteroidsFromResponse(dataResponse.value!).forEach { (k, v) in
-                        self!.responseAsteroids[k] = v
+                    self!.mapper.asteroidsFromResponse(dataResponse.value!).forEach { (key, value) in
+                        self!.responseAsteroids[key] = value
                     }
                     self!.update()
                 }
                 self!.updating = false
             }.store(in: &cancellables)
     }
-    
+
     func addToDestroyList(_ id: String) {
         guard let asteroidModel = responseAsteroids[id],
                 !databaseManager.exists(id: id, ofType: AsteroidModel.self) else { return }
         databaseManager.add(AsteroidModel(value: asteroidModel))
     }
-    
+
     func getResponseModel(_ id: String) -> AsteroidModel? {
         responseAsteroids[id]
     }
-    
+
     private func createAlert(with error: NetworkError) {
         self.error = error.backendError == nil ? error.initialError.localizedDescription : error.backendError!.errorMessage
     }
-    
+
     private func updateIdsToDestroy() {
         idsToDestroy =  Set(databaseManager.get(fromEntity: AsteroidModel.self, sortedByKey: nil, isAscending: false).compactMap({$0.id}))
     }
-    
+
     private func update() {
         if onlyHazardous {
             asteroids.send(responseAsteroids.values.filter({ $0.potentiallyHazardouds }).sorted(by: {$0.approachDate < $1.approachDate}).compactMap {

@@ -69,12 +69,12 @@ class ApproachCollectionViewCell: UICollectionViewCell {
         stackView.spacing = 5
         return stackView
     }()
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -82,13 +82,13 @@ class ApproachCollectionViewCell: UICollectionViewCell {
 // MARK: - Methods
 extension ApproachCollectionViewCell {
     private func setupViews() {
-        
+
         layer.cornerRadius = 10
         layer.shadowRadius = 10
         layer.shadowOpacity = 0.3
         layer.shadowColor = UIColor.lightGray.cgColor
         backgroundColor = .white
-        
+
         contentView.addSubview(dateLabel)
         contentView.addSubview(separatorView)
         contentView.addSubview(vStackView)
@@ -99,20 +99,20 @@ extension ApproachCollectionViewCell {
         hStackViews[1].addArrangedSubview(velocityValueLabel)
         hStackViews[2].addArrangedSubview(orbitLabel)
         hStackViews[2].addArrangedSubview(orbitValueLabel)
-        
+
         dateLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(5)
             make.leading.equalToSuperview().offset(5)
             make.trailing.equalToSuperview().offset(-5)
         }
-        
+
         separatorView.snp.makeConstraints { make in
             make.top.equalTo(dateLabel.snp.bottom).offset(5)
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
             make.height.equalTo(1)
         }
-        
+
         vStackView.snp.makeConstraints { make in
             make.top.equalTo(separatorView.snp.bottom).offset(5)
             make.leading.equalToSuperview().offset(5)
@@ -120,7 +120,7 @@ extension ApproachCollectionViewCell {
             make.bottom.equalToSuperview().offset(-5)
         }
     }
-    
+
     func configure(_ model: ApproachData) {
         distanceValueLabel.text = model.distanceString
         velocityValueLabel.text = model.velocity

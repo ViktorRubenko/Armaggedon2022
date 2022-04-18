@@ -18,7 +18,7 @@ struct BackendError: Codable, Error {
     var httpError: String
     var errorMessage: String
     var request: String
-    
+
     enum CodingKeys: String, CodingKey {
         case code
         case httpError = "http_error"

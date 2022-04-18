@@ -12,7 +12,7 @@ import SnapKit
 class AsteroidDetailViewController: UIViewController {
     private var cancellables = Set<AnyCancellable>()
     private let viewModel: AsteroidDetailViewModelProtocol!
-    
+
     private let diameterLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
@@ -86,18 +86,18 @@ class AsteroidDetailViewController: UIViewController {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
         setupNavigationBar()
         setupBinders()
     }
-    
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         if setGradient {
@@ -114,7 +114,7 @@ extension AsteroidDetailViewController {
     private func setupViews() {
         view.backgroundColor = .white
         let safeArea = view.safeAreaLayoutGuide
-        
+
         view.addSubview(topContainerView)
         topContainerView.addSubview(topBackgroudView)
         topBackgroudView.layer.cornerRadius = topContainerView.layer.cornerRadius
@@ -126,54 +126,54 @@ extension AsteroidDetailViewController {
         view.addSubview(destroyButton)
         view.addSubview(collectionView)
         view.addSubview(loadingIndicator)
-        
+
         topContainerView.snp.makeConstraints { make in
             topContainerViewTopConstraint = make.top.equalTo(safeArea).offset(10).constraint
             make.leading.equalTo(safeArea).offset(10)
             make.trailing.equalTo(safeArea).offset(-10)
             make.bottom.equalTo(destroyButton).offset(5)
         }
-        
+
         topBackgroudView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        
+
         nameLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(5)
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
         }
-        
+
         diameterLabel.snp.makeConstraints { make in
             make.top.equalTo(nameLabel.snp.bottom).offset(5)
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
         }
-        
+
         hazardousLabel.snp.makeConstraints { make in
             make.top.equalTo(diameterLabel.snp.bottom).offset(5)
             make.left.equalToSuperview()
             make.trailing.equalToSuperview()
         }
-        
+
         destroyButton.snp.makeConstraints { make in
             make.top.equalTo(hazardousLabel.snp.bottom).offset(5)
             make.top.greaterThanOrEqualTo(safeArea).offset(5)
             make.centerX.equalTo(safeArea)
         }
-        
+
         collectionView.snp.makeConstraints { make in
             make.top.equalTo(destroyButton.snp.bottom).offset(20)
             make.bottom.equalTo(safeArea)
             make.leading.equalTo(safeArea)
             make.trailing.equalTo(safeArea)
         }
-        
+
         loadingIndicator.snp.makeConstraints { make in
             make.center.equalTo(collectionView)
         }
     }
-    
+
     private func setupBinders() {
         viewModel.asteroidInfo
             .sink { [weak self] model in
@@ -187,14 +187,14 @@ extension AsteroidDetailViewController {
                 self?.collectionView.reloadData()
             }.store(in: &cancellables)
     }
-    
+
     private func updateUI(_ model: AsteroidInfo) {
         nameLabel.text = model.name
         hazardousLabel.text = model.hazardousSring
         diameterLabel.text = model.diameterString
         gradientLayer.colors = model.hazardous ? Constants.GradientColors.red.reversed() : Constants.GradientColors.green.reversed()
     }
-    
+
     private func setupNavigationBar() {
         title = "Астероид"
         let rightButton = UIBarButtonItem(
@@ -241,15 +241,15 @@ extension AsteroidDetailViewController: UICollectionViewDelegate, UICollectionVi
         cell.configure(viewModel.asteroidApproachData.value[indexPath.row])
         return cell
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.asteroidApproachData.value.count
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: ApproachesHeaderView.identifier, for: indexPath)
     }
-    
+
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let yOffset = scrollView.contentOffset.y
         if yOffset >= 0 {

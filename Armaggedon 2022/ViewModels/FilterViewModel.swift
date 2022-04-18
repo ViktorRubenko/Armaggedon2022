@@ -13,11 +13,11 @@ enum FilterOptions {
 }
 
 final class FilterViewModel: FilterViewModelProtocol {
-    
+
     private(set) var units: Constants.Units
     private(set) var onlyHazardous: Bool
     private(set) var cells: [Constants.FilterCells]
-    
+
     init(options: FilterOptions = .all) {
         switch options {
         case .all:
@@ -28,18 +28,18 @@ final class FilterViewModel: FilterViewModelProtocol {
         units = Constants.Units(rawValue: UserDefaults.standard.units)!
         onlyHazardous = UserDefaults.standard.onlyHazardous
     }
-    
+
     func apply() {
         UserDefaults.standard.onlyHazardous = onlyHazardous
         UserDefaults.standard.units = units.rawValue
     }
-    
+
     func setHazardous(onlyHazardous: Bool) {
         self.onlyHazardous = onlyHazardous
     }
-    
+
     func setUnits(units: Constants.Units) {
         self.units = units
     }
-    
+
 }

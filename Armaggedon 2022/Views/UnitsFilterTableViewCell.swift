@@ -16,20 +16,20 @@ class UnitsFilterTableViewCell: UITableViewCell {
         label.font = .systemFont(ofSize: 17)
         return label
     }()
-    
+
     private let control: UISegmentedControl = {
-        let control = UISegmentedControl(items: Constants.Units.allCases.compactMap{$0.rawValue})
+        let control = UISegmentedControl(items: Constants.Units.allCases.compactMap {$0.rawValue})
         control.selectedSegmentIndex = 0
         return control
     }()
-    
+
     var controlCallback: ((Int) -> Void)?
-    
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -43,7 +43,7 @@ extension UnitsFilterTableViewCell {
             make.height.equalTo(22)
             make.centerY.equalToSuperview()
         }
-        
+
         contentView.addSubview(control)
         control.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
@@ -51,11 +51,11 @@ extension UnitsFilterTableViewCell {
         }
         control.addTarget(self, action: #selector(didTapControl), for: .valueChanged)
     }
-    
+
     @objc func didTapControl() {
         controlCallback?(control.selectedSegmentIndex)
     }
-    
+
     func configure(selectedUnits: Constants.Units) {
         control.selectedSegmentIndex = Constants.Units.allCases.firstIndex(of: selectedUnits)!
     }

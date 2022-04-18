@@ -13,7 +13,7 @@ final class AsteroidDetailViewModel: AsteroidDetailViewModelProtocol {
     var errorPublisher: Published<String>.Publisher { $error }
     private(set) var asteroidApproachData = CurrentValueSubject<[ApproachData], Never>([])
     private(set) var asteroidInfo = CurrentValueSubject<AsteroidInfo?, Never>(nil)
-    
+
     private var asteroidModel: AsteroidModel
     private var cancellables = Set<AnyCancellable>()
     private var networkManager: NetworkServiceProtocol
@@ -28,25 +28,29 @@ final class AsteroidDetailViewModel: AsteroidDetailViewModelProtocol {
             }
         }
     }
-    
-    init(asteroidModel: AsteroidModel, networkManager: NetworkServiceProtocol = NetworkManager.shared, databaseManager: DatabaseServiceProtocol = RealmManager.shared, mapper: MapperProtocol = Mapper()) {
-        self.id = asteroidModel.id
-        self.networkManager = networkManager
-        self.databaseManager = databaseManager
-        self.mapper = mapper
-        self.units = .kilometers
-        self.asteroidModel = asteroidModel
-        
-        asteroidInfo.send(mapper.asteroidModelToInfoModel(asteroidModel))
-        UserDefaults.standard
-            .publisher(for: \.units)
-            .sink { [weak self] rawValue in
-                self?.units = Constants.Units(rawValue: rawValue)!
-            }.store(in: &cancellables)
-        
-        self.fetch()
-    }
-    
+
+    init(
+        asteroidModel: AsteroidModel,
+        networkManager: NetworkServiceProtocol = NetworkManager.shared,
+        databaseManager: DatabaseServiceProtocol = RealmManager.shared,
+        mapper: MapperProtocol = Mapper()) {
+            self.id = asteroidModel.id
+            self.networkManager = networkManager
+            self.databaseManager = databaseManager
+            self.mapper = mapper
+            self.units = .kilometers
+            self.asteroidModel = asteroidModel
+
+            asteroidInfo.send(mapper.asteroidModelToInfoModel(asteroidModel))
+            UserDefaults.standard
+                .publisher(for: \.units)
+                .sink { [weak self] rawValue in
+                    self?.units = Constants.Units(rawValue: rawValue)!
+                }.store(in: &cancellables)
+
+            self.fetch()
+        }
+
     func fetch() {
         networkManager.fetchAsteroid(id: self.id)
             .sink { [weak self] dataResponse in
@@ -59,16 +63,16 @@ final class AsteroidDetailViewModel: AsteroidDetailViewModelProtocol {
                 }
             }.store(in: &cancellables)
     }
-    
+
     private func update() {
         guard let responseModel = responseModel else { return }
         asteroidApproachData.send(mapper.asteroidDetailCellFromResponse(responseModel, units: units))
     }
-    
+
     private func createAlert(with error: NetworkError) {
         self.error = error.backendError == nil ? error.initialError.localizedDescription : error.backendError!.errorMessage
     }
-    
+
     func addToDestroyList() {
         guard !databaseManager.exists(id: id, ofType: AsteroidModel.self) else { return }
         databaseManager.add(AsteroidModel(value: asteroidModel))

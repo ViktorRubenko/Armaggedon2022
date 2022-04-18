@@ -49,45 +49,45 @@ class DestroyAsteroidsListViewController: UIViewController {
         label.textAlignment = .center
         return label
     }()
-    
+
     init(viewModel: DestroyAsteroidsListViewModelProtocol) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
         setupNavigationBar()
         setupBinders()
     }
-    
+
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
         tableView.setEditing(editing, animated: animated)
     }
-    
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         tableView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: sendBrigadeButton.bounds.height + 15, right: 0)
     }
 }
 // MARK: - Methods
-extension DestroyAsteroidsListViewController {    
+extension DestroyAsteroidsListViewController {
     private func setupViews() {
         let safeArea = view.safeAreaLayoutGuide
         view.backgroundColor = .white
-        
+
         view.addSubview(tableView)
         tableView.backgroundColor = .white
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        
+
         view.addSubview(sendBrigadeButton)
         sendBrigadeButton.snp.makeConstraints { make in
             make.bottom.equalTo(safeArea).offset(-10)
@@ -95,14 +95,14 @@ extension DestroyAsteroidsListViewController {
             make.trailing.lessThanOrEqualTo(safeArea).offset(-10)
             make.centerX.equalTo(safeArea)
         }
-        
+
         view.addSubview(noAstroidsLabel)
         noAstroidsLabel.snp.makeConstraints { make in
             make.center.equalTo(tableView)
             make.width.equalTo(tableView).multipliedBy(0.8)
         }
     }
-    
+
     private func setupNavigationBar() {
         title = "На уничтожение"
         let editButton = UIBarButtonItem(
@@ -112,7 +112,7 @@ extension DestroyAsteroidsListViewController {
             action: #selector(didTapEditButton(_:)))
         navigationItem.leftBarButtonItem = editButton
     }
-    
+
     private func setupBinders() {
         viewModel.asteroidsToDestroy.sink { [weak self] asteroids in
             self?.tableView.reloadData()
@@ -141,7 +141,7 @@ extension DestroyAsteroidsListViewController: UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         viewModel.asteroidsToDestroy.value.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(
             withIdentifier: DestroyAsteroidTableViewCell.identifier,
@@ -151,7 +151,7 @@ extension DestroyAsteroidsListViewController: UITableViewDelegate, UITableViewDa
         cell.selectionStyle = .none
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             cancellables.removeAll()
@@ -162,7 +162,7 @@ extension DestroyAsteroidsListViewController: UITableViewDelegate, UITableViewDa
             setupBinders()
         }
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let asteroid = viewModel.getResponseModel(indexPath.row)
         let vc = AsteroidDetailViewController(viewModel: AsteroidDetailViewModel(asteroidModel: asteroid))

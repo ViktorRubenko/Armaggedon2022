@@ -16,16 +16,16 @@ class HazardousFilterTableViewCell: UITableViewCell {
         label.font = .systemFont(ofSize: 17)
         return label
     }()
-    
+
     private let control = UISwitch()
-    
+
     var controlCallback: ((Bool) -> Void)?
-    
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -39,7 +39,7 @@ extension HazardousFilterTableViewCell {
             make.height.equalTo(22)
             make.centerY.equalToSuperview()
         }
-        
+
         contentView.addSubview(control)
         control.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
@@ -47,11 +47,11 @@ extension HazardousFilterTableViewCell {
         }
         control.addTarget(self, action: #selector(didTapControl), for: .valueChanged)
     }
-    
+
     @objc func didTapControl() {
         controlCallback?(control.isOn)
     }
-    
+
     func configure(onlyHazardous: Bool) {
         control.isOn = onlyHazardous
     }

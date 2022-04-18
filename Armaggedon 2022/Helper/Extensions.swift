@@ -25,8 +25,8 @@ extension String {
         regex.enumerateMatches(
             in: self,
             options: [],
-            range: NSRange(location: 0, length: self.utf16.count)) { result, flags, stop in
-                if let r = result?.range(at: 1), let range = Range(r, in: self) {
+            range: NSRange(location: 0, length: self.utf16.count)) { result, _, _ in
+                if let match = result?.range(at: 1), let range = Range(match, in: self) {
                     results.append(String(self[range]))
                 }
             }
@@ -39,12 +39,12 @@ extension UserDefaults {
         get {
             string(forKey: "units") ?? Constants.Units.kilometers.rawValue
         }
-        
+
         set {
             set(newValue, forKey: "units")
         }
     }
-    
+
     @objc var onlyHazardous: Bool {
         get {
             bool(forKey: "onlyHazardous")

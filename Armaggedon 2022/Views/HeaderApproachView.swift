@@ -31,16 +31,16 @@ class HeaderApproachView: UIView {
     private var gradientLayer = CAGradientLayer()
     private var needSetGradientLayer = true
     private var asteroidSizeConstraint: Constraint!
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         if needSetGradientLayer {
@@ -50,28 +50,28 @@ class HeaderApproachView: UIView {
             gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.5)
         }
     }
-    
+
     private func setup() {
         clipsToBounds = true
         layer.insertSublayer(gradientLayer, at: 0)
-        
+
         addSubview(nameLabel)
         addSubview(dinoImageView)
         addSubview(asteroidImageView)
-        
+
         nameLabel.snp.makeConstraints { make in
             make.bottom.equalToSuperview().offset(-8)
             make.leading.equalToSuperview().offset(16)
             make.height.equalTo(32)
         }
-        
+
         dinoImageView.snp.makeConstraints { make in
             make.bottom.equalToSuperview()
             make.trailing.equalToSuperview().offset(-12)
             make.height.equalTo(30)
             make.width.equalTo(35)
         }
-        
+
         asteroidImageView.snp.makeConstraints { make in
             make.bottom.equalTo(nameLabel.snp.top).offset(-21)
             make.leading.lessThanOrEqualToSuperview().offset(27)
@@ -79,7 +79,7 @@ class HeaderApproachView: UIView {
             asteroidSizeConstraint = make.size.equalTo(61).constraint
         }
     }
-    
+
     func configure(name: String, asteroidDiamater: Int, potentiallyHazardous: Bool) {
         nameLabel.text = name
         var size = 61.0 / 85.0 * Double(asteroidDiamater)

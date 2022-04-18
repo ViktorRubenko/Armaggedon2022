@@ -23,56 +23,56 @@ final class RealmManager: DatabaseServiceProtocol {
     private(set) var changes = CurrentValueSubject<Bool, Never>(false)
     private let realm: Realm
     private var token: NotificationToken!
-    
+
     private init() {
-        
+
         let configuration = Realm.Configuration(schemaVersion: 1)
-        
+
         do {
             realm = try Realm.init(configuration: configuration)
         } catch {
             fatalError("Error during creating Realm")
         }
-        token = realm.observe { [weak self] notification, realm in
+        token = realm.observe { [weak self] _, _ in
             self?.changes.send(true)
         }
     }
-    
+
     deinit {
         token.invalidate()
     }
-    
+
     func add<T>(_ object: T) where T: Object {
         realm.beginWrite()
         realm.add(object)
-        try! realm.commitWrite()
+        try? realm.commitWrite()
     }
-    
+
     func get<R>(
         fromEntity entity: R.Type ,
         sortedByKey sortKey: String?,
-        isAscending: Bool) -> Results<R> where R : Object {
+        isAscending: Bool) -> Results<R> where R: Object {
             var objects = realm.objects(entity)
             if sortKey != nil {
                 objects = objects.sorted(byKeyPath: sortKey!, ascending: isAscending)
             }
             return objects
         }
-    
-    func delete<S>(_ objects: S) where S : Sequence, S.Element : Object {
+
+    func delete<S>(_ objects: S) where S: Sequence, S.Element: Object {
         realm.beginWrite()
         realm.delete(objects)
-        try! realm.commitWrite()
+        try? realm.commitWrite()
     }
-    
-    func delete<T>(_ object: T) where T : Object {
+
+    func delete<T>(_ object: T) where T: Object {
         realm.beginWrite()
         realm.delete(object)
-        try! realm.commitWrite()
+        try? realm.commitWrite()
     }
-    
-    func exists<T>(id: String, ofType: T.Type) -> Bool where T : Object {
+
+    func exists<T>(id: String, ofType: T.Type) -> Bool where T: Object {
         realm.object(ofType: ofType, forPrimaryKey: id) != nil
     }
-    
+
 }

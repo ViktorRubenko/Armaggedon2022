@@ -7,4 +7,5 @@ target 'Armaggedon 2022' do
     pod 'Alamofire', '~> 5.5'
     pod 'XMLCoder', '~> 0.13.1'
     pod 'RealmSwift'
+    pod 'SwiftLint'
 end
