@@ -14,4 +14,5 @@ struct AsteroidCellModel {
     let dateString: String
     let diameter: Int
     let hazardous: Bool
+    let willBeDestroyed: Bool
 }

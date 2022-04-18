@@ -9,7 +9,8 @@ import Foundation
 
 struct AsteroidInfo {
     let name: String
-    let diameter: Int
+    let diameterString: String
+    let hazardousSring: String
     let hazardous: Bool
 }
 

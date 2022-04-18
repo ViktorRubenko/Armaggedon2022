@@ -6,12 +6,13 @@
 //
 
 import Foundation
+import UIKit
 
 protocol MapperProtocol {
     func asteroidsFromResponse(_ response: ResponseModel) -> [String: AsteroidModel]
-    func asteroidModelToCellModel(_ asteroidModel: AsteroidModel, units: Constants.Units) -> AsteroidCellModel
+    func asteroidModelToCellModel(_ asteroidModel: AsteroidModel, units: Constants.Units, idsToDestroy: Set<String>) -> AsteroidCellModel
     func asteroidDetailCellFromResponse(_ response: NearEarthObject, units: Constants.Units) -> [ApproachData]
-    func asteroidInfoFromResponse(_ response: NearEarthObject) -> AsteroidInfo
+    func asteroidModelToInfoModel(_ response: AsteroidModel) -> AsteroidInfo
     func dateForRequest(_ date: Date) -> String
 }
 
@@ -42,7 +43,7 @@ final class Mapper: MapperProtocol {
         return asteroidsDict
     }
     
-    public func asteroidModelToCellModel(_ asteroidModel: AsteroidModel, units: Constants.Units) -> AsteroidCellModel {
+    public func asteroidModelToCellModel(_ asteroidModel: AsteroidModel, units: Constants.Units, idsToDestroy: Set<String>) -> AsteroidCellModel {
         let distance: String
         switch units{
         case .kilometers:
@@ -56,7 +57,9 @@ final class Mapper: MapperProtocol {
             distanceString: distance,
             dateString: formatDate(asteroidModel.approachDate),
             diameter: asteroidModel.estimatedDiameter,
-            hazardous: asteroidModel.potentiallyHazardouds)
+            hazardous: asteroidModel.potentiallyHazardouds,
+            willBeDestroyed: idsToDestroy.contains(asteroidModel.id)
+        )
     }
     
     public func asteroidDetailCellFromResponse(_ response: NearEarthObject, units: Constants.Units) -> [ApproachData] {
@@ -69,11 +72,12 @@ final class Mapper: MapperProtocol {
             }
     }
     
-    public func asteroidInfoFromResponse(_ response: NearEarthObject) -> AsteroidInfo {
-        AsteroidInfo(
+    public func asteroidModelToInfoModel(_ response: AsteroidModel) -> AsteroidInfo {
+        return AsteroidInfo(
             name: response.name,
-            diameter: avgDiameter(response),
-            hazardous: response.isPotentiallyHazardousAsteroid)
+            diameterString: "Диаметр: \(response.estimatedDiameter) м",
+            hazardousSring: "Оценка: \(response.potentiallyHazardouds ? "Опасен" : "Не опасен" )",
+            hazardous: response.potentiallyHazardouds)
     }
     
     private func formatDate(_ date: Date) -> String {
