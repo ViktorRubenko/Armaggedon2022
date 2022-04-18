@@ -34,7 +34,7 @@ class DestroyAsteroidsListViewController: UIViewController {
         button.layer.cornerRadius = 10
         button.addTarget(self, action: #selector(didTapBridageButton), for: .touchUpInside)
         button.layer.shadowColor = UIColor.lightGray.cgColor
-        button.layer.shadowOpacity = 1
+        button.layer.shadowOpacity = 1.0
         button.layer.shadowRadius = 10
         button.isHidden = true
         return button

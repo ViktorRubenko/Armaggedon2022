@@ -63,8 +63,8 @@ final class Mapper: MapperProtocol {
         response.closeApproachData.compactMap {
                 ApproachData(
                     dateString: formatDate(Date(timeIntervalSince1970: TimeInterval($0.epochDateCloseApproach / 1000))),
-                    velocity: "\($0.relativeVelocity.kilometersPerHour) км/ч",
-                    distanceString: units == .kilometers ? "\($0.missDistance.kilometers) км" : "\($0.missDistance.lunar) лунных орбит",
+                    velocity: "\(formatNumber($0.relativeVelocity.kilometersPerHour)) км/ч",
+                    distanceString: units == .kilometers ? "\(formatNumber($0.missDistance.kilometers)) км" : "\(formatNumber($0.missDistance.lunar)) лунных орбит",
                     orbitingBody: $0.orbitingBody)
             }
     }
@@ -84,6 +84,15 @@ final class Mapper: MapperProtocol {
     }
     
     private func formatNumber(_ number: Int) -> String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.locale = Locale(identifier: "ru_RU")
+        
+        return formatter.string(for: number)!
+    }
+    
+    private func formatNumber(_ number: String) -> String {
+        let number = Int(round(Double(number)!))
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
         formatter.locale = Locale(identifier: "ru_RU")

@@ -33,6 +33,7 @@ class DestroyAsteroidTableViewCell: UITableViewCell {
         label.textAlignment = .right
         return label
     }()
+
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -66,7 +67,7 @@ extension DestroyAsteroidTableViewCell {
         
         innerContentView.layer.cornerRadius = 10
         innerContentView.layer.shadowColor = UIColor.lightGray.cgColor
-        innerContentView.layer.shadowOpacity = 10
+        innerContentView.layer.shadowOpacity = 1.0
         innerContentView.layer.shadowOffset = .zero
         innerContentView.backgroundColor = .white
         innerContentView.snp.makeConstraints { make in
