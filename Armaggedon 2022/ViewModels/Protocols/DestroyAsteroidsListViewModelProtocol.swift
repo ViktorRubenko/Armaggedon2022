@@ -12,4 +12,5 @@ protocol DestroyAsteroidsListViewModelProtocol: ViewModelProtocol {
     var asteroidsToDestroy: CurrentValueSubject<[AsteroidCellModel], Never> { get }
     func removeFromList(_ index: Int)
     func getResponseModel(_ index: Int) -> AsteroidModel
+    func removeAll()
 }

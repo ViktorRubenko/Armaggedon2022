@@ -69,11 +69,17 @@ class DestroyAsteroidsListViewController: UIViewController {
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
         tableView.setEditing(editing, animated: animated)
+        setupNavigationBar()
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         tableView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: sendBrigadeButton.bounds.height + 15, right: 0)
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        setEditing(false, animated: false)
     }
 }
 // MARK: - Methods
@@ -106,11 +112,21 @@ extension DestroyAsteroidsListViewController {
     private func setupNavigationBar() {
         title = "На уничтожение"
         let editButton = UIBarButtonItem(
-            title: "Изменить",
+            title: !tableView.isEditing ? "Изменить" : "Готово",
             style: .plain,
             target: self,
             action: #selector(didTapEditButton(_:)))
         navigationItem.leftBarButtonItem = editButton
+
+        if tableView.isEditing {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(
+                title: "Удалить все",
+                style: .plain,
+                target: self,
+                action: #selector(didTapRemoveAllButton))
+        } else {
+            navigationItem.rightBarButtonItem = nil
+        }
     }
 
     private func setupBinders() {
@@ -124,7 +140,6 @@ extension DestroyAsteroidsListViewController {
 // MARK: - Actions
 extension DestroyAsteroidsListViewController {
     @objc func didTapEditButton(_ sender: UIBarButtonItem) {
-        sender.title = tableView.isEditing ? "Изменить" : "Готово"
         setEditing(!tableView.isEditing, animated: true)
     }
     @objc func didTapBridageButton() {
@@ -134,6 +149,9 @@ extension DestroyAsteroidsListViewController {
             preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alert, animated: true)
+    }
+    @objc func didTapRemoveAllButton() {
+        viewModel.removeAll()
     }
 }
 // MARK: - UICollectionView Delegate/DS

@@ -14,8 +14,8 @@ protocol DatabaseServiceProtocol {
     func add<T: Object>(_ object: T)
     func get<R: Object>(fromEntity entity: R.Type, sortedByKey sortKey: String?, isAscending: Bool) -> Results<R>
     func delete<T: Object>(_ object: T)
-    func delete<S: Sequence>(_ objects: S) where S.Iterator.Element: Object
     func exists<T: Object>(id: String, ofType: T.Type) -> Bool
+    func deleteAll<T: Object>(_ ofType: T.Type)
 }
 
 final class RealmManager: DatabaseServiceProtocol {
@@ -43,9 +43,9 @@ final class RealmManager: DatabaseServiceProtocol {
     }
 
     func add<T>(_ object: T) where T: Object {
-        realm.beginWrite()
-        realm.add(object)
-        try? realm.commitWrite()
+        try? realm.write {
+            realm.add(object)
+        }
     }
 
     func get<R>(
@@ -59,20 +59,21 @@ final class RealmManager: DatabaseServiceProtocol {
             return objects
         }
 
-    func delete<S>(_ objects: S) where S: Sequence, S.Element: Object {
-        realm.beginWrite()
-        realm.delete(objects)
-        try? realm.commitWrite()
-    }
-
     func delete<T>(_ object: T) where T: Object {
-        realm.beginWrite()
-        realm.delete(object)
-        try? realm.commitWrite()
+        try? realm.write({
+            realm.delete(object)
+        })
     }
 
     func exists<T>(id: String, ofType: T.Type) -> Bool where T: Object {
         realm.object(ofType: ofType, forPrimaryKey: id) != nil
+    }
+
+    func deleteAll<T>(_ ofType: T.Type) where T: Object {
+        let allObjects = realm.objects(T.self)
+        try? realm.write({
+            realm.delete(allObjects)
+        })
     }
 
 }

@@ -51,4 +51,8 @@ final class DestroyAsteroidsListViewModel: DestroyAsteroidsListViewModelProtocol
     func getResponseModel(_ index: Int) -> AsteroidModel {
         asteroids[index]
     }
+
+    func removeAll() {
+        databaseManager.deleteAll(AsteroidModel.self)
+    }
 }

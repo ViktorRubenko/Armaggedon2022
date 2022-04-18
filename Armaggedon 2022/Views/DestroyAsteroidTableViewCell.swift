@@ -55,6 +55,11 @@ class DestroyAsteroidTableViewCell: UITableViewCell {
             gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.5)
         }
     }
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        gradientLayer.colors = []
+    }
 }
 // MARK: - Methods
 extension DestroyAsteroidTableViewCell {
