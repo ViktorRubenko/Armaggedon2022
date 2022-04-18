@@ -257,8 +257,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E3FAED7428079059008CDAF4 /* Build configuration list for PBXNativeTarget "Armaggedon 2022" */;
 			buildPhases = (
-				E33D4850280DFCC50007E05F /* ShellScript */,
 				5FC8622E938AEF03958CEDBC /* [CP] Check Pods Manifest.lock */,
+				E33D4850280DFCC50007E05F /* ShellScript */,
 				E3FAED5C28079057008CDAF4 /* Sources */,
 				E3FAED5D28079057008CDAF4 /* Frameworks */,
 				E3FAED5E28079057008CDAF4 /* Resources */,

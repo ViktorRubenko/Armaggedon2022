@@ -18,7 +18,13 @@ final class AsteroidsListViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.delaysContentTouches = false
-        collectionView.register(AsteroidCollectionViewCell.self, forCellWithReuseIdentifier: AsteroidCollectionViewCell.identifier)
+        collectionView.register(
+            AsteroidCollectionViewCell.self,
+            forCellWithReuseIdentifier: AsteroidCollectionViewCell.identifier)
+        collectionView.register(
+            UICollectionReusableView.self,
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
+            withReuseIdentifier: "Footer")
         return collectionView
     }()
     private let loadIndicator: UIActivityIndicatorView = {
@@ -91,6 +97,14 @@ extension AsteroidsListViewController {
         let section = NSCollectionLayoutSection(group: group)
         section.interGroupSpacing = 25
         section.contentInsets = NSDirectionalEdgeInsets(top: 19.5, leading: 16, bottom: 19.5, trailing: 16)
+        section.boundarySupplementaryItems = [
+            NSCollectionLayoutBoundarySupplementaryItem(
+                layoutSize: NSCollectionLayoutSize(
+                    widthDimension: .fractionalWidth(1),
+                    heightDimension: .absolute(44)),
+                elementKind: UICollectionView.elementKindSectionFooter,
+                alignment: .bottom)
+        ]
         return UICollectionViewCompositionalLayout(section: section)
     }
 
@@ -128,8 +142,8 @@ extension AsteroidsListViewController: UICollectionViewDelegate, UICollectionVie
     }
 
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-
-        if (viewModel.asteroids.value.count - indexPath.row) < 5 {
+        let lastRowIndex = collectionView.numberOfItems(inSection: 0) - 1
+        if (lastRowIndex - indexPath.row) < 5 {
             viewModel.fetch()
         }
     }
@@ -138,5 +152,24 @@ extension AsteroidsListViewController: UICollectionViewDelegate, UICollectionVie
         let model = viewModel.asteroids.value[indexPath.row]
         let vc = AsteroidDetailViewController(viewModel: AsteroidDetailViewModel(asteroidModel: viewModel.getResponseModel(model.id)!))
         navigationController?.pushViewController(vc, animated: true)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        if kind == UICollectionView.elementKindSectionFooter {
+            let footer = collectionView.dequeueReusableSupplementaryView(
+                ofKind: kind,
+                withReuseIdentifier: "Footer",
+                for: indexPath)
+            if collectionView.numberOfItems(inSection: 0) > 0 {
+                let spinner = UIActivityIndicatorView()
+                spinner.startAnimating()
+                footer.addSubview(spinner)
+                spinner.snp.makeConstraints { make in
+                    make.center.equalToSuperview()
+                }
+            }
+            return footer
+        }
+        return UICollectionReusableView()
     }
 }
