@@ -197,6 +197,11 @@ extension AsteroidDetailViewController {
 
     private func setupNavigationBar() {
         title = "Астероид"
+
+        let backButton = UIBarButtonItem()
+        backButton.title = "Назад"
+        navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
+
         let rightButton = UIBarButtonItem(
             image: UIImage(systemName: "line.3.horizontal.decrease"),
             style: .done,
