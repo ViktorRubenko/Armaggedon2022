@@ -7,16 +7,24 @@
 
 import Foundation
 
+enum FilterOptions {
+    case all
+    case units
+}
+
 final class FilterViewModel: FilterViewModelProtocol {
     
     private(set) var units: Constants.Units
     private(set) var onlyHazardous: Bool
-    private(set) var cells = [
-        Constants.FilterCells.units,
-        Constants.FilterCells.onlyHazardous
-    ]
+    private(set) var cells: [Constants.FilterCells]
     
-    init() {
+    init(options: FilterOptions = .all) {
+        switch options {
+        case .all:
+            cells = [Constants.FilterCells.units, Constants.FilterCells.onlyHazardous]
+        case .units:
+            cells = [Constants.FilterCells.units]
+        }
         units = Constants.Units(rawValue: UserDefaults.standard.units)!
         onlyHazardous = UserDefaults.standard.onlyHazardous
     }

@@ -31,7 +31,6 @@ final class RealmManager: DatabaseServiceProtocol {
         do {
             realm = try Realm.init(configuration: configuration)
         } catch {
-            print(error)
             fatalError("Error during creating Realm")
         }
         token = realm.observe { [weak self] notification, realm in

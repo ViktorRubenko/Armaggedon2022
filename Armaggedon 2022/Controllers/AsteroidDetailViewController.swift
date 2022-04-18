@@ -93,8 +93,8 @@ class AsteroidDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Астероид"
         setupViews()
+        setupNavigationBar()
         setupBinders()
     }
     
@@ -106,7 +106,6 @@ class AsteroidDetailViewController: UIViewController {
             gradientLayer.startPoint = CGPoint(x: 0.5, y: 0.0)
             gradientLayer.endPoint = CGPoint(x: 0.5, y: 0.9)
             maxOffset = topContainerView.frame.origin.y - destroyButton.frame.origin.y + 5
-            print(maxOffset)
         }
     }
 }
@@ -195,6 +194,16 @@ extension AsteroidDetailViewController {
         diameterLabel.text = model.diameterString
         gradientLayer.colors = model.hazardous ? Constants.GradientColors.red.reversed() : Constants.GradientColors.green.reversed()
     }
+    
+    private func setupNavigationBar() {
+        title = "Астероид"
+        let rightButton = UIBarButtonItem(
+            image: UIImage(systemName: "line.3.horizontal.decrease"),
+            style: .done,
+            target: self,
+            action: #selector(didTapFilterButton))
+        navigationItem.rightBarButtonItem = rightButton
+    }
 }
 // MARK: - Methods
 extension AsteroidDetailViewController {
@@ -219,6 +228,10 @@ extension AsteroidDetailViewController {
 extension AsteroidDetailViewController {
     @objc private func didTapDestroyButton() {
         viewModel.addToDestroyList()
+    }
+    @objc private func didTapFilterButton() {
+        let vc = FilterViewController(viewModel: FilterViewModel(options: .units))
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 // MARK: - UICollectionView Delegate/DS

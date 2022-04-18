@@ -69,8 +69,11 @@ extension AsteroidsListViewController {
                 self?.collectionView.reloadData()
             }
         }.store(in: &cancellables)
-        viewModel.errorPublisher.sink { error in
-            print(error)
+        viewModel.errorPublisher.sink { [weak self] error in
+            guard !error.isEmpty else { return }
+            let alert = UIAlertController(title: "Ошибка", message: error, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            self?.present(alert, animated: true)
         }.store(in: &cancellables)
     }
     
@@ -103,7 +106,7 @@ extension AsteroidsListViewController {
 }
 // MARK: - Actions
 extension AsteroidsListViewController {
-    @objc func didTapFilterButton() {
+    @objc private func didTapFilterButton() {
         let vc = FilterViewController(viewModel: FilterViewModel())
         navigationController?.pushViewController(vc, animated: true)
     }
