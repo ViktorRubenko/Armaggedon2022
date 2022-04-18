@@ -68,7 +68,7 @@ final class Mapper: MapperProtocol {
                     dateString: formatDate(Date(timeIntervalSince1970: TimeInterval($0.epochDateCloseApproach / 1000))),
                     velocity: "\(formatNumber($0.relativeVelocity.kilometersPerHour)) км/ч",
                     distanceString: units == .kilometers ? "\(formatNumber($0.missDistance.kilometers)) км" : "\(formatNumber($0.missDistance.lunar)) лунных орбит",
-                    orbitingBody: $0.orbitingBody)
+                    orbitingBody: Constants.planets[$0.orbitingBody] ?? $0.orbitingBody)
             }
     }
     

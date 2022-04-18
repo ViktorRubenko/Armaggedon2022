@@ -40,4 +40,14 @@ enum Constants {
         case units
         case onlyHazardous
     }
+    static let planets  = [
+        "Mercury": "Меркурий",
+        "Venus": "Венера",
+        "Earth": "Земля",
+        "Mars": "Марс",
+        "Jupiter": "Юпитер",
+        "Saturn": "Сатунр",
+        "Uranus": "Уран",
+        "Neptune": "Нептун"
+    ]
 }
