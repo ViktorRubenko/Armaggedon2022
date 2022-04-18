@@ -67,13 +67,6 @@ class AsteroidDetailViewController: UIViewController {
         collectionView.register(ApproachesHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: ApproachesHeaderView.identifier)
         return collectionView
     }()
-    private let approachesLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Подлеты:"
-        label.font = .systemFont(ofSize: 30)
-        label.textAlignment = .center
-        return label
-    }()
     private let loadingIndicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView()
         indicator.startAnimating()
