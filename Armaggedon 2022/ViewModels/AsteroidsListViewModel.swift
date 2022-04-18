@@ -33,6 +33,7 @@ final class AsteroidsListViewModel: AsteroidListViewModelProtocol {
             }
         }
     }
+    private var idsToDestroy = Set<String>()
     private var date = Date()
     
     init(
@@ -44,6 +45,7 @@ final class AsteroidsListViewModel: AsteroidListViewModelProtocol {
             self.mapper = mapper
             self.onlyHazardous = UserDefaults.standard.onlyHazardous
             self.units = Constants.Units(rawValue: UserDefaults.standard.units)!
+            updateIdsToDestroy()
             
             UserDefaults.standard
                 .publisher(for: \.units)
@@ -56,6 +58,11 @@ final class AsteroidsListViewModel: AsteroidListViewModelProtocol {
                 .sink { [weak self] value in
                     self?.onlyHazardous = value
                 }.store(in: &cancellables)
+            
+            databaseManager.changes.sink { [weak self] _ in
+                self?.updateIdsToDestroy()
+                self?.update()
+            }.store(in: &cancellables)
             
             fetch()
         }
@@ -93,14 +100,18 @@ final class AsteroidsListViewModel: AsteroidListViewModelProtocol {
         self.error = error.backendError == nil ? error.initialError.localizedDescription : error.backendError!.errorMessage
     }
     
+    private func updateIdsToDestroy() {
+        idsToDestroy =  Set(databaseManager.get(fromEntity: AsteroidModel.self, sortedByKey: nil, isAscending: false).compactMap({$0.id}))
+    }
+    
     private func update() {
         if onlyHazardous {
             asteroids.send(responseAsteroids.values.filter({ $0.potentiallyHazardouds }).sorted(by: {$0.approachDate < $1.approachDate}).compactMap {
-                self.mapper.asteroidModelToCellModel($0, units: units)
+                self.mapper.asteroidModelToCellModel($0, units: units, idsToDestroy: idsToDestroy)
             })
         } else {
             asteroids.send(responseAsteroids.values.sorted(by: {$0.approachDate < $1.approachDate}).compactMap {
-                self.mapper.asteroidModelToCellModel($0, units: units)
+                self.mapper.asteroidModelToCellModel($0, units: units, idsToDestroy: idsToDestroy)
             })
         }
     }

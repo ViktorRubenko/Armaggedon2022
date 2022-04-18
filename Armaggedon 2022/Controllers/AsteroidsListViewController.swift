@@ -17,6 +17,7 @@ final class AsteroidsListViewController: UIViewController {
             collectionViewLayout: self.createLayout())
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.delaysContentTouches = false
         collectionView.register(AsteroidCollectionViewCell.self, forCellWithReuseIdentifier: AsteroidCollectionViewCell.identifier)
         return collectionView
     }()

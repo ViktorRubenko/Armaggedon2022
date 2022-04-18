@@ -12,10 +12,12 @@ final class AsteroidDetailViewModel: AsteroidDetailViewModelProtocol {
     @Published private(set) var error: String = ""
     var errorPublisher: Published<String>.Publisher { $error }
     private(set) var asteroidApproachData = CurrentValueSubject<[ApproachData], Never>([])
-    private(set) var asteroid = CurrentValueSubject<AsteroidModel?, Never>(nil)
+    private(set) var asteroidInfo = CurrentValueSubject<AsteroidInfo?, Never>(nil)
     
+    private var asteroidModel: AsteroidModel
     private var cancellables = Set<AnyCancellable>()
     private var networkManager: NetworkServiceProtocol
+    private var databaseManager: DatabaseServiceProtocol
     private var mapper: MapperProtocol
     private var id: String
     private var responseModel: NearEarthObject!
@@ -27,13 +29,15 @@ final class AsteroidDetailViewModel: AsteroidDetailViewModelProtocol {
         }
     }
     
-    init(asteroidModel: AsteroidModel, networkManager: NetworkServiceProtocol = NetworkManager.shared, mapper: MapperProtocol = Mapper()) {
+    init(asteroidModel: AsteroidModel, networkManager: NetworkServiceProtocol = NetworkManager.shared, databaseManager: DatabaseServiceProtocol = RealmManager.shared, mapper: MapperProtocol = Mapper()) {
         self.id = asteroidModel.id
         self.networkManager = networkManager
+        self.databaseManager = databaseManager
         self.mapper = mapper
         self.units = .kilometers
+        self.asteroidModel = asteroidModel
         
-        asteroid.send(asteroidModel)
+        asteroidInfo.send(mapper.asteroidModelToInfoModel(asteroidModel))
         UserDefaults.standard
             .publisher(for: \.units)
             .sink { [weak self] rawValue in
@@ -63,5 +67,10 @@ final class AsteroidDetailViewModel: AsteroidDetailViewModelProtocol {
     
     private func createAlert(with error: NetworkError) {
         self.error = error.backendError == nil ? error.initialError.localizedDescription : error.backendError!.errorMessage
+    }
+    
+    func addToDestroyList() {
+        guard !databaseManager.exists(id: id, ofType: AsteroidModel.self) else { return }
+        databaseManager.add(AsteroidModel(value: asteroidModel))
     }
 }

@@ -21,12 +21,17 @@ final class DestroyAsteroidsListViewModel: DestroyAsteroidsListViewModelProtocol
         self.mapper = mapper
         self.units = Constants.Units(rawValue: UserDefaults.standard.units)!
         
+        databaseManager.changes.sink { [weak self] _ in
+            self?.fetch()
+        }.store(in: &cancellables)
+        
         UserDefaults.standard
             .publisher(for: \.units)
             .sink { [weak self] rawValue in
                 self?.units = Constants.Units(rawValue: rawValue)!
                 self?.fetch()
             }.store(in: &cancellables)
+        
         fetch()
     }
     
@@ -35,13 +40,12 @@ final class DestroyAsteroidsListViewModel: DestroyAsteroidsListViewModelProtocol
             fromEntity: AsteroidModel.self,
             sortedByKey: "approachDate",
             isAscending: true))
-        asteroidsToDestroy.send(asteroids.compactMap { self.mapper.asteroidModelToCellModel($0, units: self.units) })
+        asteroidsToDestroy.send(
+            asteroids.compactMap { mapper.asteroidModelToCellModel($0, units: units, idsToDestroy: []) })
     }
     
     func removeFromList(_ index: Int) {
-        asteroidsToDestroy.value.remove(at: index)
         databaseManager.delete(asteroids[index])
-        asteroids.remove(at: index)
     }
     
     func getResponseModel(_ index: Int) -> AsteroidModel {

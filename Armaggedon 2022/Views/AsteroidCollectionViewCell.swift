@@ -115,20 +115,7 @@ extension AsteroidCollectionViewCell {
 // MARK: - Actions
 extension AsteroidCollectionViewCell {
     @objc func didTapDestroyButton() {
-        UIView.animate(
-            withDuration: 0.05,
-            animations: {
-                self.destroyButton.backgroundColor = .red
-            }, completion: { _ in
-                UIView.animate(
-                    withDuration: 0.05,
-                    animations: {
-                        self.destroyButton.backgroundColor = Constants.Colors.destroyButtonColor
-                    },
-                    completion: { _ in
-                        self.destroyButtonHandler?()
-                    })
-            })
+        self.destroyButtonHandler?()
     }
 }
 

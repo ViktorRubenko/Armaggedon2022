@@ -7,10 +7,11 @@
 
 import Foundation
 import RealmSwift
+import Combine
 
 protocol DatabaseServiceProtocol {
+    var changes: CurrentValueSubject<Bool, Never> { get }
     func add<T: Object>(_ object: T)
-    func add<S: Sequence>(_ objects: S) where S.Iterator.Element: Object
     func get<R: Object>(fromEntity entity: R.Type, sortedByKey sortKey: String?, isAscending: Bool) -> Results<R>
     func delete<T: Object>(_ object: T)
     func delete<S: Sequence>(_ objects: S) where S.Iterator.Element: Object
@@ -19,7 +20,10 @@ protocol DatabaseServiceProtocol {
 
 final class RealmManager: DatabaseServiceProtocol {
     static let shared = RealmManager()
+    private(set) var changes = CurrentValueSubject<Bool, Never>(false)
     private let realm: Realm
+    private var token: NotificationToken!
+    
     private init() {
         
         let configuration = Realm.Configuration(schemaVersion: 1)
@@ -30,17 +34,18 @@ final class RealmManager: DatabaseServiceProtocol {
             print(error)
             fatalError("Error during creating Realm")
         }
+        token = realm.observe { [weak self] notification, realm in
+            self?.changes.send(true)
+        }
+    }
+    
+    deinit {
+        token.invalidate()
     }
     
     func add<T>(_ object: T) where T: Object {
         realm.beginWrite()
         realm.add(object)
-        try! realm.commitWrite()
-    }
-    
-    func add<S>(_ objects: S) where S : Sequence, S.Element : Object {
-        realm.beginWrite()
-        realm.add(objects)
         try! realm.commitWrite()
     }
     
