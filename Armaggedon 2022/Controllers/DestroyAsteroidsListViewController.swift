@@ -167,4 +167,10 @@ extension DestroyAsteroidsListViewController: UITableViewDelegate, UITableViewDa
             setupBinders()
         }
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let asteroid = viewModel.getResponseModel(indexPath.row)
+        let vc = AsteroidDetailViewController(viewModel: AsteroidDetailViewModel(asteroidModel: asteroid))
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }

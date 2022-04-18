@@ -44,7 +44,7 @@ final class DestroyAsteroidsListViewModel: DestroyAsteroidsListViewModelProtocol
         asteroids.remove(at: index)
     }
     
-    func orderBrigate() {
-        
+    func getResponseModel(_ index: Int) -> AsteroidModel {
+        asteroids[index]
     }
 }
