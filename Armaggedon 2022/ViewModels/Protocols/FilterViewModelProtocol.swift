@@ -9,8 +9,8 @@ import Foundation
 import Combine
 
 protocol FilterViewModelProtocol {
-    var units: Constants.Units { get }
-    var onlyHazardous: Bool { get }
+    var units: CurrentValueSubject<Constants.Units, Never> { get }
+    var onlyHazardous: CurrentValueSubject<Bool, Never> { get }
     var cells: [Constants.FilterCells] { get }
     func setHazardous(onlyHazardous: Bool)
     func setUnits(units: Constants.Units)

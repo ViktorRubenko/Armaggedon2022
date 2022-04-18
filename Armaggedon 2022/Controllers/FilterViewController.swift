@@ -33,6 +33,7 @@ class FilterViewController: UIViewController {
         super.viewDidLoad()
         setupNavigationBar()
         setupViews()
+        setupBinders()
     }
 }
 // MARK: - Methods
@@ -51,6 +52,16 @@ extension FilterViewController {
         navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             title: "Применить", style: .done, target: self, action: #selector(didTapApplyButton))
+    }
+
+    private func setupBinders() {
+        viewModel.units.sink { [weak self] _ in
+            self?.tableView.reloadData()
+        }.store(in: &cancellables)
+
+        viewModel.onlyHazardous.sink { [weak self] _ in
+            self?.tableView.reloadData()
+        }.store(in: &cancellables)
     }
 }
 // MARK: - Actions {
@@ -74,14 +85,14 @@ extension FilterViewController: UITableViewDelegate, UITableViewDataSource {
         switch cellType {
         case .units:
             let cell = UnitsFilterTableViewCell()
-            cell.configure(selectedUnits: viewModel.units)
+            cell.configure(selectedUnits: viewModel.units.value)
             cell.controlCallback = { [weak self] index in
                 self?.viewModel.setUnits(units: Constants.Units.allCases[index])
             }
             return cell
         case .onlyHazardous:
             let cell = HazardousFilterTableViewCell()
-            cell.configure(onlyHazardous: viewModel.onlyHazardous)
+            cell.configure(onlyHazardous: viewModel.onlyHazardous.value)
             cell.controlCallback = { [weak self] value in
                 self?.viewModel.setHazardous(onlyHazardous: value)
             }
