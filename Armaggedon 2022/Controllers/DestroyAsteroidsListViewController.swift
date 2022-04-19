@@ -111,20 +111,25 @@ extension DestroyAsteroidsListViewController {
 
     private func setupNavigationBar() {
         title = "На уничтожение"
-        let editButton = UIBarButtonItem(
-            title: !tableView.isEditing ? "Изменить" : "Готово",
-            style: .plain,
-            target: self,
-            action: #selector(didTapEditButton(_:)))
-        navigationItem.leftBarButtonItem = editButton
-
-        if tableView.isEditing {
-            navigationItem.rightBarButtonItem = UIBarButtonItem(
-                title: "Удалить все",
+        if tableView.numberOfRows(inSection: 0) != 0 {
+            let editButton = UIBarButtonItem(
+                title: !tableView.isEditing ? "Изменить" : "Готово",
                 style: .plain,
                 target: self,
-                action: #selector(didTapRemoveAllButton))
+                action: #selector(didTapEditButton(_:)))
+            navigationItem.leftBarButtonItem = editButton
+
+            if tableView.isEditing {
+                navigationItem.rightBarButtonItem = UIBarButtonItem(
+                    title: "Удалить все",
+                    style: .plain,
+                    target: self,
+                    action: #selector(didTapRemoveAllButton))
+            } else {
+                navigationItem.rightBarButtonItem = nil
+            }
         } else {
+            navigationItem.leftBarButtonItem = nil
             navigationItem.rightBarButtonItem = nil
         }
     }
@@ -134,6 +139,7 @@ extension DestroyAsteroidsListViewController {
             self?.tableView.reloadData()
             self?.sendBrigadeButton.isHidden = asteroids.isEmpty
             self?.noAstroidsLabel.isHidden = !asteroids.isEmpty
+            self?.setupNavigationBar()
         }.store(in: &cancellables)
     }
 }
