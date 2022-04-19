@@ -83,7 +83,7 @@ class HeaderApproachView: UIView {
     func configure(name: String, asteroidDiamater: Int, potentiallyHazardous: Bool) {
         nameLabel.text = name
         var size = 61.0 / 85.0 * Double(asteroidDiamater)
-        size = size > 800 ? 340 : size
+        size = size > 500 ? 500 : size
         size = size < 25 ? 25 : size
         asteroidSizeConstraint.deactivate()
         asteroidImageView.snp.makeConstraints { make in
