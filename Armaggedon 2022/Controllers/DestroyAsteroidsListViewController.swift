@@ -151,7 +151,7 @@ extension DestroyAsteroidsListViewController {
     @objc func didTapBridageButton() {
         let alert = UIAlertController(
             title: "Бригада заказана!",
-            message: "Бригада будет доставлена на асторид в нужный момент для его уничтожения!",
+            message: "Бригада будет доставлена на астероид в нужный момент для его уничтожения!",
             preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alert, animated: true)
